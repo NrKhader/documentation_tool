@@ -77,6 +77,34 @@ documentation_tool
 
 5. **Start creating and managing your documentation!**
 
+## Docker Quick Start
+
+1. **Build the Docker image:**
+   ```sh
+   docker build -t documentation_tool .
+
+2. **Run the container:**
+   ```sh
+   docker run -p 5000:5000 \
+   -e DOCUMENTS_DIR=/data \
+   -v /path/on/host:/data \
+   documentation_tool
+
+Replace /path/on/host with a folder on your computer where you want documents to be stored.
+
+**Result:**  
+- When running locally, the user will be prompted for a path if `DOCUMENTS_DIR` is not set.
+- When running in Docker, use `-e DOCUMENTS_DIR` and `-v` to persist documents outside the container.
+
+This ensures documents are never lost when the container stops and gives users full control over where their files are stored.**Result:**  
+- When running locally, the user will be prompted for a path if `DOCUMENTS_DIR` is not set.
+- When running in Docker, use `-e DOCUMENTS_DIR` and `-v` to persist documents outside the container.
+
+This ensures documents are never lost when the container stops and gives users full control over where their files are stored.
+
+3. Open your browser and visit:
+`http://localhost:5000`
+
 ---
 
 ## Usage

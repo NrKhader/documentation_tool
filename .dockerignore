@@ -1,0 +1,16 @@
+# Ignore local documentation files so they are not copied into the Docker image
+src/documents
+
+# Ignore Python cache and virtual environments
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+env/
+venv/
+ENV/
+.venv/
+
+# Ignore git files
+.git
+.gitignore

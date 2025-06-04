@@ -6,7 +6,22 @@ import json
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
 
-DOCUMENTS_DIR = os.path.join(os.path.dirname(__file__), "documents")
+
+def get_documents_dir():
+    env_dir = os.environ.get("DOCUMENTS_DIR")
+    if env_dir:
+        return env_dir
+    # Prompt user for a path if not running in Docker
+    print("Please provide a path to save your documents (default: ./src/documents): ", end="")
+    try:
+        user_input = input().strip()
+    except EOFError:
+        user_input = ""
+    return user_input if user_input else os.path.join(os.path.dirname(__file__), "documents")
+
+
+# Only call once and use the result everywhere
+DOCUMENTS_DIR = get_documents_dir()
 os.makedirs(DOCUMENTS_DIR, exist_ok=True)
 
 DEFAULT_SECTION = "home"
@@ -199,4 +214,4 @@ def search():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000, debug=True)
