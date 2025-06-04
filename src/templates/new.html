@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}New Document - Documentation Tool{% endblock %}
+{% block content %}
+<div class="page-flex">
+    <div class="page-main-container container">
+        <header>
+            <h1>Create New Document</h1>
+        </header>
+        <main>
+            <form method="post" id="doc-form">
+                <label for="section">Section/Folder:</label><br>
+                <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference"><br><br>
+                <label for="title">Title:</label><br>
+                <input type="text" id="title" name="title" required><br><br>
+                <label for="tags">Tags (comma or space separated):</label><br>
+                <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api"><br><br>
+                <label for="content">Content (Markdown):</label><br>
+                <textarea id="content" name="content" rows="15" cols="80" required></textarea><br><br>
+                <button type="submit">Create</button>
+            </form>
+        </main>
+    </div>
+    <aside class="markdown-help">
+        <h3>Markdown Cheatsheet</h3>
+        <ul style="font-size: 0.95em;">
+            <li><b>Heading 1:</b> <code># Heading 1</code></li>
+            <li><b>Heading 2:</b> <code>## Heading 2</code></li>
+            <li><b>Bold:</b> <code>**bold text**</code></li>
+            <li><b>Italic:</b> <code>*italic text*</code></li>
+            <li><b>List:</b> <code>- item 1<br>- item 2</code></li>
+            <li><b>Numbered List:</b> <code>1. First<br>2. Second</code></li>
+            <li><b>Code:</b> <code>`inline code`</code></li>
+            <li><b>Code Block:</b>
+                <pre><code>```python
+def hello():
+    print("Hello, world!")
+```</code></pre>
+            </li>
+            <li><b>Link:</b> <code>[title](https://example.com)</code></li>
+        </ul>
+    </aside>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% comment %} ation_tool/src/templates/page.html --> {% endcomment %}
+{% extends "base.html" %}
+{% block title %}{{ title }} - Documentation Tool{% endblock %}
+{% block content %}
+<div class="container">
+    <header>
+        <h1>{{ title }}</h1>
+        <a href="{{ url_for('edit_document', doc_path=title) }}" class="edit-btn">Edit</a>
+    </header>
+    <main>
+        <article>
+            {{ content|safe }}
+        </article>
+    </main>
+</div>
+{% endblock %}

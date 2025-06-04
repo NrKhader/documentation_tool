@@ -1,0 +1,57 @@
+<!-- filepath: /Users/nkhader/projects/documentation_tool/documentation_tool/src/templates/edit.html -->
+{% extends "base.html" %}
+{% block title %}Edit {{ title }} - Documentation Tool{% endblock %}
+{% block content %}
+<div class="page-flex">
+    <aside class="sidebar">
+        <h4 class="sidebar-title">{{ current_section|capitalize }}</h4>
+        <ul class="sidebar-list">
+            {% for doc in section_docs %}
+                <li {% if doc.filename == current_doc %}class="active"{% endif %}>
+                    <a href="{{ url_for('page', doc_path=doc.path) }}">{{ doc.filename }}</a>
+                </li>
+            {% endfor %}
+        </ul>
+    </aside>
+    <div class="page-main-container container">
+        <header>
+            <h1>Edit Document: {{ title }}</h1>
+        </header>
+        <main>
+            <div class="edit-notebook">
+                <div class="notebook-lines"></div>
+                <form method="post" id="doc-form" autocomplete="off">
+                    <label for="tags">Tags (comma or space separated):</label>
+                    <input type="text" id="tags" name="tags" value="{{ tags|default('') }}">
+                    <label for="content">Content (Markdown):</label>
+                    <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content">{{ content }}</div>
+                    <textarea id="content" name="content" style="display:none;" required>{{ content }}</textarea>
+                    <button type="submit">Save</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <aside class="markdown-help notebook-cheatsheet">
+        <h2>📒 Markdown Cheatsheet</h2>
+        <ul>
+            <li><span class="cheat-label">Heading 1</span> <code># Heading 1</code></li>
+            <li><span class="cheat-label">Heading 2</span> <code>## Heading 2</code></li>
+            <li><span class="cheat-label">Bold</span> <code>**bold text**</code></li>
+            <li><span class="cheat-label">Italic</span> <code>*italic text*</code></li>
+            <li><span class="cheat-label">List</span> <code>- item 1<br>- item 2</code></li>
+            <li><span class="cheat-label">Numbered List</span> <code>1. First<br>2. Second</code></li>
+            <li><span class="cheat-label">Inline Code</span> <code>`inline code`</code></li>
+            <li><span class="cheat-label">Code Block</span>
+                <pre><code>```python
+def hello():
+    print("Hello, world!")
+```</code></pre>
+            </li>
+            <li><span class="cheat-label">Link</span> <code>[title](https://example.com)</code></li>
+            <li><span class="cheat-label">Image</span> <code>![alt text](image.jpg)</code></li>
+            <li><span class="cheat-label">Quote</span> <code>&gt; Quoted text</code></li>
+            <li><span class="cheat-label">Horizontal Rule</span> <code>---</code></li>
+        </ul>
+    </aside>
+</div>
+{% endblock %}

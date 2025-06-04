@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Search Results - Documentation Tool{% endblock %}
+{% block content %}
+<div class="container">
+    <h2>Search Results for "{{ query }}"</h2>
+    {% if results %}
+        <ul class="doc-list">
+        {% for doc in results %}
+            <li>
+                <a class="doc-link" href="{{ url_for('page', doc_path=doc.path) }}">{{ doc.filename }}</a>
+                {% if doc.tags %}
+                    <span class="tag-list">
+                    {% for tag in doc.tags %}
+                        <span class="tag">#{{ tag }}</span>
+                    {% endfor %}
+                    </span>
+                {% endif %}
+                <a class="edit-link" href="{{ url_for('edit_document', doc_path=doc.path) }}">Edit</a>
+            </li>
+        {% endfor %}
+        </ul>
+    {% else %}
+        <p>No documents found matching your search.</p>
+    {% endif %}
+</div>
+{% endblock %}
