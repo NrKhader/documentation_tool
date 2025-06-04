@@ -2,6 +2,19 @@
 
 This project is a documentation tool designed to create and manage documentation pages, tutorials, and code snippets. It features a simplistic webpage with text formatting options for headings, normal text, and code blocks.
 
+The idea stemmed from my need for a documentation tool that is always accessible and one that I can access and manage as I see fit. And instead of purchasing a subscription for one, I decided to make one.
+
+Now, I'm no web designer, I only worked for a single in 2020. So I had to work with copilot to be able to build this.
+
+The tool is still very basic and requires lots of enhancements and improvements and of course, features to consider and add.
+
+Any feedback, collaboration or suggestions for new features are welcome. You can create a PR on a separate branch and I'd be happy to review and integrate to my tool. ^^
+
+This is a fun idea to test the capabilities of current AI, and the potential of its capabilities in the future.
+As a data scientist, I had to be knowledgable of this and what better way than to create a tool that I'll use daily.
+
+That's a lot of rambling for a readme file, but it gives you an idea of where I'm headed with this and how this simple tool came to be and how I'm using AI to improve and add to it in my spare time. :D
+
 ## Features
 
 - Create and manage documentation pages
@@ -39,20 +52,32 @@ documentation_tool
 └── .gitignore               # Files to ignore in version control
 ```
 
-## Installation
+## Quick Start
 
-1. Clone the repository:
-   ```
+1. **Clone the repository:**
+   ```sh
    git clone <repository-url>
-   ```
-2. Navigate to the project directory:
-   ```
    cd documentation_tool
    ```
-3. Install the required dependencies:
-   ```
+
+2. **Install dependencies:**
+   ```sh
    pip install -r requirements.txt
    ```
+
+3. **Run the application:**
+   ```sh
+   python src/app.py
+   ```
+
+4. **Open your browser and visit:**
+   ```
+   http://localhost:5000
+   ```
+
+5. **Start creating and managing your documentation!**
+
+---
 
 ## Usage
 
@@ -64,13 +89,6 @@ documentation_tool
 - **Navigation:** Use the sidebar and dropdowns to quickly navigate between sections and documents.
 - **Theme:** Toggle between light and dark mode for comfortable reading.
 - **Unsaved Changes Warning:** Get a warning if you try to leave an edit page with unsaved changes.
-
-To run the application, execute the following command:
-```
-python src/app.py
-```
-
-Visit `http://localhost:5000` in your web browser to access the documentation tool.
 
 ## Contributing
 
