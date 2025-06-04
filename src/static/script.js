@@ -75,5 +75,59 @@ document.addEventListener('DOMContentLoaded', function () {
         form.addEventListener('submit', function () {
             hiddenTextarea.value = writingSpace.innerText.replace(/\r\n|\r|\n/g, '\n');
         });
+
+        // Fix: Allow breaking out of code block with Enter on empty line or Escape
+        writingSpace.addEventListener('keydown', function (e) {
+            // If inside a code block and Enter is pressed on an empty line, break out
+            if (e.key === 'Enter') {
+                const selection = window.getSelection();
+                if (selection && selection.anchorNode) {
+                    // Get the current line text
+                    let node = selection.anchorNode;
+                    // If inside a <div> or <pre>, get the text content
+                    let lineText = node.textContent || '';
+                    // If the line is empty and inside a code block, break out
+                    if (
+                        lineText.trim() === '' &&
+                        node.parentElement &&
+                        (node.parentElement.nodeName === 'PRE' || node.parentElement.nodeName === 'CODE')
+                    ) {
+                        // Prevent default Enter
+                        e.preventDefault();
+                        // Move caret after the code block
+                        let after = document.createElement('div');
+                        after.innerHTML = '<br>';
+                        node.parentElement.parentElement.insertBefore(after, node.parentElement.nextSibling);
+                        // Move caret to new line
+                        let range = document.createRange();
+                        range.setStart(after, 0);
+                        range.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                }
+            }
+            // Or allow Escape to break out of code block
+            if (e.key === 'Escape') {
+                const selection = window.getSelection();
+                if (selection && selection.anchorNode) {
+                    let node = selection.anchorNode;
+                    if (
+                        node.parentElement &&
+                        (node.parentElement.nodeName === 'PRE' || node.parentElement.nodeName === 'CODE')
+                    ) {
+                        e.preventDefault();
+                        let after = document.createElement('div');
+                        after.innerHTML = '<br>';
+                        node.parentElement.parentElement.insertBefore(after, node.parentElement.nextSibling);
+                        let range = document.createRange();
+                        range.setStart(after, 0);
+                        range.collapse(true);
+                        selection.removeAllRanges();
+                        selection.addRange(range);
+                    }
+                }
+            }
+        });
     }
 });
