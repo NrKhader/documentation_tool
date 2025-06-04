@@ -69,11 +69,11 @@ document.addEventListener('DOMContentLoaded', function () {
     if (writingSpace && hiddenTextarea && form) {
         // Sync on input
         writingSpace.addEventListener('input', function () {
-            hiddenTextarea.value = writingSpace.innerText.replace(/\r\n|\r|\n/g, '\n');
+            hiddenTextarea.value = writingSpace.innerHTML; // <-- Use innerHTML
         });
         // On form submit, ensure sync
         form.addEventListener('submit', function () {
-            hiddenTextarea.value = writingSpace.innerText.replace(/\r\n|\r|\n/g, '\n');
+            hiddenTextarea.value = writingSpace.innerHTML; // <-- Use innerHTML
         });
 
         // Fix: Allow breaking out of code block with Enter on empty line or Escape
@@ -129,5 +129,45 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             }
         });
+    }
+});
+
+// Toolbar formatting
+document.addEventListener('DOMContentLoaded', function () {
+    const toolbar = document.querySelector('.editor-toolbar');
+    const writingSpace = document.getElementById('writing-space');
+    if (toolbar && writingSpace) {
+        toolbar.addEventListener('click', function (e) {
+            const btn = e.target.closest('.toolbar-btn');
+            if (!btn) return;
+            const cmd = btn.dataset.command;
+            writingSpace.focus();
+            if (cmd === 'bold' || cmd === 'italic' || cmd === 'insertUnorderedList' || cmd === 'insertOrderedList' || cmd === 'undo' || cmd === 'redo' || cmd === 'insertHorizontalRule') {
+                document.execCommand(cmd, false, null);
+            } else if (cmd === 'h2') {
+                document.execCommand('formatBlock', false, 'h2');
+            } else if (cmd === 'code') {
+                document.execCommand('formatBlock', false, 'pre');
+            } else if (cmd === 'createLink') {
+                const url = prompt('Enter the URL');
+                if (url) document.execCommand('createLink', false, url);
+            } else if (cmd === 'insertImage') {
+                const url = prompt('Enter the image URL');
+                if (url) document.execCommand('insertImage', false, url);
+            } else if (cmd === 'formatBlock' && btn.dataset.value === 'blockquote') {
+                document.execCommand('formatBlock', false, 'blockquote');
+            }
+        });
+    }
+    // Word count
+    if (writingSpace) {
+        const wordCount = document.getElementById('word-count');
+        const updateCount = () => {
+            const text = writingSpace.innerText || '';
+            const count = text.trim().split(/\s+/).filter(Boolean).length;
+            if (wordCount) wordCount.textContent = `${count} word${count !== 1 ? 's' : ''}`;
+        };
+        writingSpace.addEventListener('input', updateCount);
+        updateCount();
     }
 });

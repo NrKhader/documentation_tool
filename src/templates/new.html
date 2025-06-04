@@ -5,50 +5,59 @@
 <div class="page-flex">
     <aside class="sidebar">
         <h4 class="sidebar-title">Sections</h4>
-        <!-- Optionally, list sections here if you want -->
+        <div class="sidebar-actions">
+            <a href="{{ url_for('index') }}" class="edit-btn" style="margin-top:1em;">← Back to Home</a>
+        </div>
     </aside>
     <div class="page-main-container container">
-        <header>
-            <h1>Create New Document</h1>
+        <header class="editor-header">
+            <input type="text" id="title" name="title" class="editor-title" placeholder="Document Title" required>
+            <div class="editor-actions">
+                <button type="submit" form="doc-form" class="save-btn">Create</button>
+            </div>
         </header>
         <main>
-            <div class="edit-notebook">
-                <div class="notebook-lines"></div>
-                <form method="post" id="doc-form" autocomplete="off">
-                    <label for="section">Section/Folder:</label>
-                    <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference">
-                    <label for="title">Title:</label>
-                    <input type="text" id="title" name="title" required>
-                    <label for="tags">Tags (comma or space separated):</label>
-                    <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api">
-                    <label for="content">Content (Markdown):</label>
-                    <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content"></div>
-                    <textarea id="content" name="content" style="display:none;" required></textarea>
-                    <button type="submit">Create</button>
-                </form>
-            </div>
+            <form method="post" id="doc-form" autocomplete="off">
+                <label for="section">Section/Folder:</label>
+                <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference" style="font-size:0.98em; padding:0.3em 0.5em; margin-bottom:0.7em;">
+                <div class="editor-toolbar">
+                    <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><b>B</b></button>
+                    <button type="button" class="toolbar-btn" data-command="italic" title="Italic"><i>I</i></button>
+                    <button type="button" class="toolbar-btn" data-command="h2" title="Heading 2">H2</button>
+                    <button type="button" class="toolbar-btn" data-command="code" title="Code Block">{"</>"}</button>
+                    <button type="button" class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">• List</button>
+                    <button type="button" class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">1. List</button>
+                    <button type="button" class="toolbar-btn" data-command="createLink" title="Insert Link">🔗</button>
+                    <button type="button" class="toolbar-btn" data-command="insertImage" title="Insert Image">🖼️</button>
+                    <button type="button" class="toolbar-btn" data-command="formatBlock" data-value="blockquote" title="Blockquote">❝</button>
+                    <button type="button" class="toolbar-btn" data-command="insertHorizontalRule" title="Horizontal Rule">―</button>
+                    <button type="button" class="toolbar-btn" data-command="undo" title="Undo">⎌</button>
+                    <button type="button" class="toolbar-btn" data-command="redo" title="Redo">⎌⎌</button>
+                </div>
+                <label for="tags" style="font-size:0.98em;">Tags:</label>
+                <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api" style="font-size:0.98em; padding:0.3em 0.5em; margin-bottom:0.7em; width:60%;">
+                <label for="content" style="font-size:0.98em;">Content:</label>
+                <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content" style="font-size:1em; min-height:220px;"></div>
+                <textarea id="content" name="content" style="display:none;" required></textarea>
+                <div class="editor-footer">
+                    <span id="word-count" style="font-size:0.95em;">0 words</span>
+                </div>
+            </form>
         </main>
     </div>
     <aside class="markdown-help notebook-cheatsheet">
-        <h2>📒 Markdown Cheatsheet</h2>
+        <h2>📒 Formatting Cheatsheet</h2>
         <ul>
-            <li><span class="cheat-label">Heading 1</span> <code># Heading 1</code></li>
-            <li><span class="cheat-label">Heading 2</span> <code>## Heading 2</code></li>
-            <li><span class="cheat-label">Bold</span> <code>**bold text**</code></li>
-            <li><span class="cheat-label">Italic</span> <code>*italic text*</code></li>
-            <li><span class="cheat-label">List</span> <code>- item 1<br>- item 2</code></li>
-            <li><span class="cheat-label">Numbered List</span> <code>1. First<br>2. Second</code></li>
-            <li><span class="cheat-label">Inline Code</span> <code>`inline code`</code></li>
-            <li><span class="cheat-label">Code Block</span>
-                <pre><code>```python
-def hello():
-    print("Hello, world!")
-```</code></pre>
-            </li>
-            <li><span class="cheat-label">Link</span> <code>[title](https://example.com)</code></li>
-            <li><span class="cheat-label">Image</span> <code>![alt text](image.jpg)</code></li>
-            <li><span class="cheat-label">Quote</span> <code>&gt; Quoted text</code></li>
-            <li><span class="cheat-label">Horizontal Rule</span> <code>---</code></li>
+            <li><span class="cheat-label">Bold</span> <code>&lt;b&gt;bold text&lt;/b&gt;</code></li>
+            <li><span class="cheat-label">Italic</span> <code>&lt;i&gt;italic text&lt;/i&gt;</code></li>
+            <li><span class="cheat-label">Heading 2</span> <code>&lt;h2&gt;Heading&lt;/h2&gt;</code></li>
+            <li><span class="cheat-label">Code Block</span> <code>&lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</code></li>
+            <li><span class="cheat-label">List</span> <code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code></li>
+            <li><span class="cheat-label">Numbered List</span> <code>&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</code></li>
+            <li><span class="cheat-label">Link</span> <code>&lt;a href="url"&gt;link&lt;/a&gt;</code></li>
+            <li><span class="cheat-label">Image</span> <code>&lt;img src="image.jpg" alt="desc"&gt;</code></li>
+            <li><span class="cheat-label">Blockquote</span> <code>&lt;blockquote&gt;quote&lt;/blockquote&gt;</code></li>
+            <li><span class="cheat-label">Horizontal Rule</span> <code>&lt;hr&gt;</code></li>
         </ul>
     </aside>
 </div>
