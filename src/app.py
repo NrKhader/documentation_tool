@@ -39,7 +39,7 @@ def list_documents():
     for root, dirs, files in os.walk(DOCUMENTS_DIR):
         rel_root = os.path.relpath(root, DOCUMENTS_DIR)
         for f in files:
-            if f.endswith(".md"):
+            if f.endswith(".html"):
                 if rel_root == ".":
                     section = DEFAULT_SECTION
                     path = f
@@ -74,6 +74,9 @@ def save_document(section, filename, content, tags=None):
     section = section if section else DEFAULT_SECTION
     dir_path = os.path.join(DOCUMENTS_DIR, section)
     os.makedirs(dir_path, exist_ok=True)
+    # Ensure .html extension
+    if not filename.endswith('.html'):
+        filename = filename.rsplit('.', 1)[0] + '.html'
     full_path = os.path.join(dir_path, filename)
     with open(full_path, "w", encoding="utf-8") as f:
         f.write(content)
@@ -109,16 +112,15 @@ def page(doc_path):
                 tags = meta.get("tags", [])
         except Exception:
             tags = []
-    # Get all docs in the current section
     docs = list_documents()
     section_name = section if section else DEFAULT_SECTION
     section_docs = [doc for doc in docs if doc["section"] == section_name]
-    # Render markdown to HTML
-    html_content = markdown.markdown(content, extensions=["fenced_code", "codehilite"])
+    # No markdown conversion needed
+    html_content = content
     return render_template(
         "page.html",
         title=doc_path,
-        content=html_content,  # <-- Pass rendered HTML
+        content=html_content,
         tags=tags,
         current_section=section_name,
         current_doc=filename,
