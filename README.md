@@ -107,6 +107,43 @@ This ensures documents are never lost when the container stops and gives users f
 
 ---
 
+# Development Setup: Creating a Virtual Environment
+
+To set up a development environment for this project, it is recommended to use a Python virtual environment. This keeps dependencies isolated and your system Python clean.
+
+## 1. Create and Activate a Virtual Environment
+
+**On macOS/Linux:**
+```sh
+python3 -m venv venv
+source venv/bin/activate
+```
+
+**On Windows:**
+```sh
+python -m venv venv
+venv\Scripts\activate
+```
+
+## 2. Install Dependencies
+
+After activating your virtual environment, install the required packages:
+```sh
+pip install -r requirements.txt
+```
+
+## 3. Run the Application
+
+```sh
+python src/app.py
+```
+
+You can now develop and test your changes in an isolated environment.  
+To deactivate the virtual environment when done, simply run:
+```sh
+deactivate
+```
+
 ## Usage
 
 - **Create a new document:** Use the web interface to add a new page or tutorial. The document will be saved as a Markdown file in the `src/documents/` directory.
