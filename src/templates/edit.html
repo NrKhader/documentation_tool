@@ -16,14 +16,14 @@
         </div>
     </aside>
     <div class="page-main-container container">
-        <header class="editor-header">
-            <input type="text" id="title" name="title" class="editor-title" value="{{ title if title else '' }}" required>
-            <div class="editor-actions">
-                <button type="submit" form="doc-form" class="save-btn">Save</button>
-            </div>
-        </header>
         <main>
             <form method="post" id="doc-form" autocomplete="off">
+                <header class="editor-header">
+                    <input type="text" id="title" name="title" class="editor-title" value="{{ title if title else '' }}" required>
+                    <div class="editor-actions">
+                        <button type="submit" class="save-btn">Save</button>
+                    </div>
+                </header>
                 <label for="section">Section/Folder:</label>
                 <input type="text" id="section" name="section" value="{{ current_section if current_section else '' }}" placeholder="e.g. guides, tutorials, reference" style="font-size:0.98em; padding:0.3em 0.5em; margin-bottom:0.7em;">
                 <div class="editor-toolbar">

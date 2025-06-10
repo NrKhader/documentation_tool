@@ -131,16 +131,16 @@ def page(doc_path):
 @app.route("/new", methods=["GET", "POST"])
 def new_document():
     if request.method == "POST":
-        section = request.form["section"].strip()
-        title = request.form["title"].strip()
+        section = request.form.get("section", "").strip()
+        title = request.form.get("title", "").strip()
         tags_raw = request.form.get("tags", "")
         tags = [
             t.strip().lstrip("#")
             for t in tags_raw.replace(",", " ").split()
             if t.strip()
         ]
-        content = request.form["content"]
-        filename = f"{title.replace(' ', '_')}.md"
+        content = request.form.get("content", "")
+        filename = f"{title.replace(' ', '_')}.html"
         if not title:
             flash("Title is required.", "error")
             return redirect(url_for("new_document"))
@@ -166,27 +166,59 @@ def edit_document(doc_path):
     docs = list_documents()
     section_name = section if section else DEFAULT_SECTION
     section_docs = [doc for doc in docs if doc["section"] == section_name]
-    if request.method == "POST":
-        content = request.form["content"]
-        tags_raw = request.form.get("tags", "")
-        tags = [
-            t.strip().lstrip("#")
-            for t in tags_raw.replace(",", " ").split()
-            if t.strip()
-        ]
-        save_document(section, filename, content, tags)
-        flash("Document updated.", "success")
-        return redirect(url_for("page", doc_path=doc_path))
     content = load_document(doc_path)
     if content is None:
         flash("Document not found.", "error")
         return redirect(url_for("index"))
+
+    if request.method == "POST":
+        # Get updated fields
+        new_title = request.form.get("title", "").strip()
+        new_section = request.form.get("section", "").strip()
+        tags_raw = request.form.get("tags", "")
+        new_tags = [
+            t.strip().lstrip("#")
+            for t in tags_raw.replace(",", " ").split()
+            if t.strip()
+        ]
+        new_content = request.form.get("content", "")
+
+        # Determine new filename and section
+        new_filename = f"{new_title.replace(' ', '_')}.html"
+        new_section = new_section if new_section else DEFAULT_SECTION
+
+        # If section or filename changed, move/rename the file
+        old_path = os.path.join(DOCUMENTS_DIR, section, filename)
+        new_dir = os.path.join(DOCUMENTS_DIR, new_section)
+        os.makedirs(new_dir, exist_ok=True)
+        new_path = os.path.join(new_dir, new_filename)
+
+        if (new_section != section or new_filename != filename) and os.path.exists(old_path):
+            os.rename(old_path, new_path)
+            # Move meta file if exists
+            old_meta = get_meta_path(section, filename)
+            new_meta = get_meta_path(new_section, new_filename)
+            if os.path.exists(old_meta):
+                os.rename(old_meta, new_meta)
+            # Remove old empty section dir if needed
+            try:
+                if not os.listdir(os.path.join(DOCUMENTS_DIR, section)):
+                    os.rmdir(os.path.join(DOCUMENTS_DIR, section))
+            except Exception:
+                pass
+
+        # Save new content and tags
+        save_document(new_section, new_filename, new_content, new_tags)
+        flash("Document updated.", "success")
+        return redirect(url_for("page", doc_path=os.path.join(new_section, new_filename)))
+
+    # For GET, fill in the form with current values
     return render_template(
         "edit.html",
-        title=doc_path,
+        title=filename.rsplit('.', 1)[0].replace('_', ' '),
         content=content,
         tags=", ".join(f"#{t}" for t in tags),
-        current_section=section_name,
+        current_section=section,
         current_doc=filename,
         section_docs=section_docs,
     )
