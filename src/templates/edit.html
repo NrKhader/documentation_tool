@@ -19,14 +19,16 @@
         <main>
             <form method="post" id="doc-form" autocomplete="off">
                 <header class="editor-header">
-                    <input type="text" id="title" name="title" class="editor-title" value="{{ title if title else '' }}" required>
-                    <div class="editor-actions">
-                        <button type="submit" class="save-btn">Save</button>
-                    </div>
+                    <input type="text" id="title" name="title" class="editor-title"
+                        value="{{ title if title else '' }}" required>
+                    <span id="autosave-status" style="margin-left:0.5em; color:#47d5d0; font-size:0.97em; display:none;">Saved</span>
                 </header>
-                <label for="section">Section/Folder:</label>
-                <input type="text" id="section" name="section" value="{{ current_section if current_section else '' }}" placeholder="e.g. guides, tutorials, reference" style="font-size:0.98em; padding:0.3em 0.5em; margin-bottom:0.7em;">
-                <div class="editor-toolbar">
+                <label for="section" style="font-size:0.97em; margin-bottom:0.2em;">Section/Folder:</label>
+                <input type="text" id="section" name="section" value="{{ current_section if current_section else '' }}"
+                    placeholder="e.g. guides, tutorials, reference"
+                    style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 220px;">
+                <div class="editor-toolbar" style="gap:0.3em; margin-bottom:0.7em;">
+                    <!-- toolbar buttons here -->
                     <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><b>B</b></button>
                     <button type="button" class="toolbar-btn" data-command="italic" title="Italic"><i>I</i></button>
                     <button type="button" class="toolbar-btn" data-command="h2" title="Heading 2">H2</button>
@@ -40,31 +42,27 @@
                     <button type="button" class="toolbar-btn" data-command="undo" title="Undo">⎌</button>
                     <button type="button" class="toolbar-btn" data-command="redo" title="Redo">⎌⎌</button>
                 </div>
-                <label for="tags" style="font-size:0.98em;">Tags:</label>
-                <input type="text" id="tags" name="tags" value="{{ tags|default('') }}" placeholder="#python, #flask, #api" style="font-size:0.98em; padding:0.3em 0.5em; margin-bottom:0.7em; width:60%;">
-                <label for="content" style="font-size:0.98em;">Content:</label>
-                <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content" style="font-size:1em; min-height:220px;">{{ content|safe }}</div>
+                <label for="tags" style="font-size:0.97em; margin-bottom:0.2em;">Tags:</label>
+                <input type="text" id="tags" name="tags" value="{{ tags|default('') }}"
+                    placeholder="#python, #flask, #api"
+                    style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 320px;">
+                <label for="content" style="font-size:0.97em; margin-bottom:0.2em;">Content:</label>
+                <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content"
+                    style="font-size:0.98em; min-height:180px; padding:1em 0.7em; border-radius:8px; border:1.5px solid #929aab;">
+                    {{ content|safe }}
+                </div>
                 <textarea id="content" name="content" style="display:none;" required>{{ content|safe }}</textarea>
-                <div class="editor-footer">
-                    <span id="word-count" style="font-size:0.95em;">0 words</span>
+                <div class="editor-footer" style="margin-top:0.5em; color:#929aab; font-size:0.95em; text-align:right;">
+                    <span id="word-count">0 words</span>
+                </div>
+                <div style="display: flex; justify-content: flex-end; margin-top: 1.2em;">
+                    <button type="submit" class="save-btn">Save</button>
                 </div>
             </form>
         </main>
     </div>
     <aside class="markdown-help notebook-cheatsheet">
-        <h2>📒 Formatting Cheatsheet</h2>
-        <ul>
-            <li><span class="cheat-label">Bold</span> <code>&lt;b&gt;bold text&lt;/b&gt;</code></li>
-            <li><span class="cheat-label">Italic</span> <code>&lt;i&gt;italic text&lt;/i&gt;</code></li>
-            <li><span class="cheat-label">Heading 2</span> <code>&lt;h2&gt;Heading&lt;/h2&gt;</code></li>
-            <li><span class="cheat-label">Code Block</span> <code>&lt;pre&gt;&lt;code&gt;...&lt;/code&gt;&lt;/pre&gt;</code></li>
-            <li><span class="cheat-label">List</span> <code>&lt;ul&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ul&gt;</code></li>
-            <li><span class="cheat-label">Numbered List</span> <code>&lt;ol&gt;&lt;li&gt;Item&lt;/li&gt;&lt;/ol&gt;</code></li>
-            <li><span class="cheat-label">Link</span> <code>&lt;a href="url"&gt;link&lt;/a&gt;</code></li>
-            <li><span class="cheat-label">Image</span> <code>&lt;img src="image.jpg" alt="desc"&gt;</code></li>
-            <li><span class="cheat-label">Blockquote</span> <code>&lt;blockquote&gt;quote&lt;/blockquote&gt;</code></li>
-            <li><span class="cheat-label">Horizontal Rule</span> <code>&lt;hr&gt;</code></li>
-        </ul>
+        <!-- cheatsheet content -->
     </aside>
 </div>
 {% endblock %}

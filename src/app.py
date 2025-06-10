@@ -2,6 +2,7 @@ import os
 from flask import Flask, render_template, request, redirect, url_for, flash
 import markdown
 import json
+from flask import jsonify
 
 app = Flask(__name__)
 app.secret_key = "your_secret_key"
@@ -246,6 +247,25 @@ def search():
             results.append(doc)
     return render_template("search_results.html", query=query, results=results)
 
+
+@app.route("/autosave", methods=["POST"])
+def autosave_document():
+    data = request.get_json()
+    section = data.get("section", "").strip()
+    title = data.get("title", "").strip()
+    tags_raw = data.get("tags", "")
+    tags = [
+        t.strip().lstrip("#")
+        for t in tags_raw.replace(",", " ").split()
+        if t.strip()
+    ]
+    content = data.get("content", "")
+    filename = f"{title.replace(' ', '_')}.html"
+    if not title:
+        return jsonify({"success": False, "error": "Title is required."}), 400
+    save_document(section, filename, content, tags)
+    doc_path = os.path.join(section if section else DEFAULT_SECTION, filename)
+    return jsonify({"success": True, "doc_path": doc_path})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

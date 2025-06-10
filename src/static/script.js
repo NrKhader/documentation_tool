@@ -23,33 +23,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Warn about unsaved changes on edit/new document pages
-document.addEventListener('DOMContentLoaded', function () {
-    const form = document.getElementById('doc-form');
-    if (form) {
-        let initialData = new FormData(form);
-        let isDirty = false;
+// REMOVE: Unsaved changes warning logic (no longer needed with auto-save)
 
-        // Mark as dirty if any field changes
-        form.addEventListener('input', () => {
-            isDirty = true;
-        });
-
-        // On submit, allow navigation
-        form.addEventListener('submit', () => {
-            isDirty = false;
-        });
-
-        // Warn if trying to leave with unsaved changes
-        window.addEventListener('beforeunload', function (e) {
-            if (isDirty) {
-                e.preventDefault();
-                e.returnValue = '';
-            }
-        });
-    }
-});
-
+// Document section toggle
 document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.section-toggle').forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -62,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// Writing space and hidden textarea sync
 document.addEventListener('DOMContentLoaded', function () {
     const writingSpace = document.getElementById('writing-space');
     const hiddenTextarea = document.getElementById('content');
@@ -169,5 +147,63 @@ document.addEventListener('DOMContentLoaded', function () {
         };
         writingSpace.addEventListener('input', updateCount);
         updateCount();
+    }
+});
+
+// Optional: Add a "Saved" indicator to the editor header in your HTML:
+// <span id="autosave-status" style="margin-left:1em; color:#47d5d0; font-size:0.95em; display:none;">Saved</span>
+
+// Enhance auto-save to show/hide the "Saved" indicator
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('doc-form');
+    const writingSpace = document.getElementById('writing-space');
+    const autosaveStatus = document.getElementById('autosave-status');
+    let autosaveTimeout = null;
+    let lastSavedData = "";
+
+    function getFormData() {
+        return {
+            title: form.querySelector('[name="title"]').value,
+            section: form.querySelector('[name="section"]').value,
+            tags: form.querySelector('[name="tags"]').value,
+            content: writingSpace ? writingSpace.innerHTML : ""
+        };
+    }
+
+    async function autoSave() {
+        const data = getFormData();
+        const dataString = JSON.stringify(data);
+        if (dataString === lastSavedData || !data.title) return;
+        lastSavedData = dataString;
+        try {
+            await fetch("/autosave", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: dataString
+            });
+            if (autosaveStatus) {
+                autosaveStatus.style.display = "inline";
+                autosaveStatus.textContent = "Saved";
+                setTimeout(() => { autosaveStatus.style.display = "none"; }, 1200);
+            }
+        } catch (e) {
+            if (autosaveStatus) {
+                autosaveStatus.style.display = "inline";
+                autosaveStatus.textContent = "Auto-save failed";
+                autosaveStatus.style.color = "#e74c3c";
+                setTimeout(() => { autosaveStatus.style.display = "none"; autosaveStatus.style.color = "#47d5d0"; }, 2000);
+            }
+        }
+    }
+
+    if (form && writingSpace) {
+        form.addEventListener('input', function () {
+            clearTimeout(autosaveTimeout);
+            autosaveTimeout = setTimeout(autoSave, 1200);
+        });
+        writingSpace.addEventListener('input', function () {
+            clearTimeout(autosaveTimeout);
+            autosaveTimeout = setTimeout(autoSave, 1200);
+        });
     }
 });
