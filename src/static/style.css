@@ -237,7 +237,7 @@ body.dark-mode .sidebar {
     margin-bottom: 1.5em;
     color: #929aab;
     letter-spacing: 0.01em;
-    padding-left: 0.1em;
+    /* padding-left: 0.1em; */
     width: 100%;
     border-bottom: 1px solid #929aab33;
     padding-bottom: 0.7em;
@@ -674,7 +674,7 @@ body.dark-mode .page-main-container article blockquote {
 }
 
 body.dark-mode .section-toggle {
-    color: #d3d5fd;
+    color: #23272f;
 }
 
 body.dark-mode .section-toggle.open,
@@ -682,345 +682,66 @@ body.dark-mode .section-toggle:hover {
     color: #47d5d0;
 }
 
-/* --- Notebook Theme for Editing Page --- */
-.edit-notebook {
-    background: #fff;
-    border-radius: 14px;
-    box-shadow: 0 2px 16px rgba(146,154,171,0.13);
-    padding: 2.5em 2.5em 2em 3.5em;
-    margin: 2em auto 2em auto;
-    max-width: 900px;
-    min-width: 320px;
-    position: relative;
-    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-    /* Subtle paper grain effect */
-    background-image:
-        repeating-linear-gradient(
-            to bottom,
-            #d3d5fd 0px,
-            #d3d5fd 31px,
-            #e6e8ff 32px,
-            #d3d5fd 33px
-        );
-    border-left: 6px solid #929aab;
-}
-
-.edit-notebook label {
-    font-weight: 600;
-    color: #474a56;
-    margin-top: 1.2em;
-    margin-bottom: 0.4em;
-    display: block;
-    letter-spacing: 0.01em;
-}
-
-.edit-notebook input[type="text"],
-.edit-notebook textarea {
-    width: 100%;
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid #929aab;
-    font-size: 1.08em;
-    color: #474a56;
-    padding: 0.5em 0.2em;
-    margin-bottom: 1.5em;
-    outline: none;
-    transition: border-color 0.2s;
-    font-family: inherit;
-    resize: vertical;
-}
-
-.edit-notebook input[type="text"]:focus,
-.edit-notebook textarea:focus {
-    border-bottom: 2.5px solid #474a56;
-    background: #f7f8fa;
-}
-
-.edit-notebook textarea {
-    min-height: 180px;
-    line-height: 1.6;
-    background: transparent;
-    font-family: 'Fira Mono', 'Courier New', Courier, monospace;
-}
-
-.edit-notebook button {
-    background: #929aab;
-    color: #fff;
-    border: none;
-    border-radius: 6px;
-    padding: 0.7em 1.7em;
-    font-size: 1.08em;
-    font-weight: 600;
-    cursor: pointer;
-    margin-top: 1.2em;
-    transition: background 0.2s, color 0.2s;
-    box-shadow: 0 1px 4px rgba(71,74,86,0.08);
-    letter-spacing: 0.01em;
-}
-
-.edit-notebook button:hover {
-    background: #474a56;
-    color: #fff;
-}
-
-.edit-notebook .notebook-lines {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    width: 2.5em;
-    background: repeating-linear-gradient(
-        to bottom,
-        transparent 0px,
-        transparent 31px,
-        #bfc2e2 32px,
-        transparent 33px
-    );
-    border-top-left-radius: 14px;
-    border-bottom-left-radius: 14px;
-    z-index: 1;
-    pointer-events: none;
-}
-
-body.dark-mode .edit-notebook {
-    background: #23272f;
-    background-image:
-        repeating-linear-gradient(
-            to bottom,
-            #23272f 0px,
-            #23272f 31px,
-            #39315b 32px,
-            #23272f 33px
-        );
-    border-left: 6px solid #929aab;
-    color: #d3d5fd;
-}
-
-body.dark-mode .edit-notebook label {
-    color: #d3d5fd;
-}
-
-body.dark-mode .edit-notebook input[type="text"],
-body.dark-mode .edit-notebook textarea {
-    color: #d3d5fd;
-    border-bottom: 2px solid #929aab;
-    background: transparent;
-}
-
-body.dark-mode .edit-notebook input[type="text"]:focus,
-body.dark-mode .edit-notebook textarea:focus {
-    border-bottom: 2.5px solid #47d5d0;
-    background: #39315b;
-}
-
-body.dark-mode .edit-notebook button {
-    background: #929aab;
-    color: #fff;
-}
-
-body.dark-mode .edit-notebook button:hover {
-    background: #474a56;
-    color: #fff;
-}
-
-/* Writing Space Style */
-.writing-space {
-    min-height: 350px;
-    width: 100%;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 1.08em;
-    font-family: 'Fira Mono', 'Courier New', Courier, monospace;
-    color: #474a56;
-    line-height: 1.7;
-    padding: 1.2em 0.7em 1.2em 0.7em;
-    margin-bottom: 1.5em;
-    resize: none;
-    box-sizing: border-box;
-    white-space: pre-wrap;
-    word-break: break-word;
-    /* Subtle shadow for focus */
-    transition: box-shadow 0.2s;
-    border-radius: 8px;
-}
-
-.writing-space:focus {
-    background: #f7f8fa;
-    box-shadow: 0 0 0 2px #929aab33;
-}
-
-body.dark-mode .writing-space {
-    color: #d3d5fd;
-    background: transparent;
-}
-
-body.dark-mode .writing-space:focus {
-    background: #39315b;
-    box-shadow: 0 0 0 2px #929aab55;
-}
-/* Add to your style.css for notebook cheatsheet styling */
-.notebook-cheatsheet {
-    background: #fffbe6;
-    border-radius: 14px;
-    box-shadow: 0 2px 12px rgba(146,154,171,0.10);
-    border-left: 6px solid #929aab;
-    padding: 2em 2em 2em 2.5em;
-    margin: 2em 0 2em 0;
-    font-size: 1em;
-    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-    color: #474a56;
-    max-width: 400px;
-    min-width: 260px;
-    width: 100%;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    height: 1000px;
-    overflow-y: auto;
-    position: sticky;
-    top: 2em;
-    z-index: 10;
-}
-
-body.dark-mode .notebook-cheatsheet {
-    background: #23272f;
-    color: #d3d5fd;
-    border-left: 6px solid #929aab;
-}
-
-.notebook-cheatsheet h2 {
-    font-size: 1.35em;
-    margin-bottom: 1em;
-    color: #474a56;
-    letter-spacing: 0.01em;
-    font-weight: 700;
-}
-
-body.dark-mode .notebook-cheatsheet h2 {
-    color: #d3d5fd;
-}
-
-.notebook-cheatsheet ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-.notebook-cheatsheet li {
-    margin-bottom: 1.2em;
-    line-height: 1.6;
-    display: flex;
-    align-items: flex-start;
-    gap: 0.7em;
-    width: 100%;
-    word-break: break-word;
-}
-
-.cheat-label {
-    min-width: 120px;
-    font-weight: 600;
-    color: #929aab;
-    display: inline-block;
-}
-
-body.dark-mode .cheat-label {
-    color: #d3d5fd;
-}
-
-.notebook-cheatsheet code {
-    background: #d3d5fd;
-    color: #474a56;
-    border-radius: 4px;
-    padding: 2px 7px;
-    font-size: 1em;
-    font-family: 'Fira Mono', 'Courier New', Courier, monospace;
-    word-break: break-all;
-}
-
-body.dark-mode .notebook-cheatsheet code {
-    background: #39315b;
-    color: #d3d5fd;
-}
-
-.notebook-cheatsheet pre {
-    background: #d3d5fd;
-    color: #0b0b0d;
-    border-radius: 6px;
-    padding: 0.7em 1em;
-    margin: 0.5em 0 0 0;
-    font-size: 0.98em;
-    overflow-x: auto;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-body.dark-mode .notebook-cheatsheet pre {
-    background: #39315b;
-    color: #d3d5fd;
-}
-
+/* --- Editor Title Box Improvements --- */
 .editor-header {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start; /* Justify to the left */
     margin-bottom: 1.2em;
     gap: 1em;
 }
+
 .editor-title {
-    font-size: 1.7em;
-    font-weight: 600;
-    border: none;
-    background: transparent;
-    color: #39315b;
-    flex: 1;
-    outline: none;
-    padding: 0.2em 0.5em;
-    border-bottom: 2px solid #929aab;
-    border-radius: 0;
-    margin-right: 1em;
+    max-width: 320px;
+    min-width: 140px;
+    font-size: 1.13em;
+    padding: 0.5em 1.2em;
+    border-radius: 8px;
+    border: 1.5px solid #929aab;
+    background: #23272f; /* Dark background */
+    color: #d3d5fd;           /* <-- Make the text inside the title box light for contrast */
+    margin-right: 0.7em;
+    margin-left: 0.7em;
+    text-align: left;         /* <-- Left-align the content inside the box */
+    box-shadow: 0 2px 8px rgba(71,74,86,0.07);
+    transition: background 0.2s, color 0.2s, border 0.2s;
 }
-.editor-title:focus {
-    background: #f7f8fa;
-    border-bottom: 2.5px solid #47d5d0;
-}
-.editor-actions .save-btn {
-    background: #47d5d0;
-    color: #fff;
-    font-size: 1.1em;
-    font-weight: 600;
-    border-radius: 6px;
-    padding: 0.7em 2em;
-    border: none;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-.editor-actions .save-btn:hover {
+
+.editor-title:focus,
+.editor-title:active {
     background: #39315b;
+    color: #fff;              /* <-- On focus, make the text even lighter */
+    border: 1.5px solid #47d5d0;
+    outline: none;
 }
-.editor-toolbar {
-    display: flex;
-    gap: 0.5em;
-    margin-bottom: 1em;
-}
-.toolbar-btn {
-    background: #d3d5fd;
+
+/* Make sure the rest of the form fields match the new darker look */
+input[type="text"], textarea {
+    background: #23272f; /* Darker background instead of #fff */
+    color: #23272f;
     border: 1px solid #929aab;
-    border-radius: 5px;
-    padding: 0.3em 0.7em;
-    font-size: 1.1em;
-    cursor: pointer;
-    color: #474a56;
+}
+
+input[type="text"]:focus, textarea:focus {
+    border: 1.5px solid #47d5d0;
+    background: #39315b;
+    color: #fff;
+}
+
+/* Optional: Adjust writing space for a darker look */
+.writing-space {
+    font-size: 0.98em;
+    min-height: 180px;
+    padding: 1em 0.7em;
+    border-radius: 8px;
+    border: 1.5px solid #929aab;
+    background: #23272f;
+    color: #d3d5fd;
     transition: background 0.2s, color 0.2s;
 }
-.toolbar-btn:hover {
-    background: #929aab;
+
+.writing-space:focus {
+    background: #39315b;
     color: #fff;
-}
-.editor-footer {
-    margin-top: 0.7em;
-    color: #929aab;
-    font-size: 0.98em;
-    text-align: right;
+    outline: none;
 }
