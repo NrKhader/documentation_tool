@@ -1,29 +1,70 @@
 {% extends "base.html" %}
 {% block title %}Documentation Tool{% endblock %}
 {% block content %}
-<div class="container">
-    <h2 style="margin-bottom: 1.2em;">Documents</h2>
-    <ul class="folder-tree">
-        {% macro render_tree(tree, level=0) %}
-            {% for node in tree %}
-                {% if node.type == 'folder' %}
-                    <li class="folder" data-path="{{ node.path }}" style="margin-left: {{ level * 18 }}px;">
-                        <span class="folder-label" style="cursor:pointer;">
-                            📁 {{ node.name }}
-                        </span>
-                        <ul style="margin-left: 0;">
-                            {{ render_tree(node.children, level+1) }}
-                        </ul>
-                    </li>
-                {% else %}
-                    <li class="file" draggable="true" data-path="{{ node.path }}" style="margin-left: {{ level * 18 }}px;">
-                        <span style="margin-right: 6px;">📄</span>
-                        <a href="{{ url_for('page', doc_path=node.path) }}">{{ node.name }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        {% endmacro %}
-        {{ render_tree(doc_tree) }}
-    </ul>
+<div class="page-flex">
+    <aside class="sidebar" style="min-width: 240px;">
+        <h4 class="sidebar-title">Folders</h4>
+        <ul class="folder-tree">
+            {% macro render_tree(tree, level=0) %}
+                {% for node in tree %}
+                    {% if node.type == 'folder' %}
+                        <li class="folder" data-path="{{ node.path }}">
+                            <div class="folder-header" style="margin-left: {{ level * 10 }}px;">
+                                <span class="folder-label" style="cursor:pointer;">
+                                    ▶️ {{ node.name }}
+                                </span>
+                            </div>
+                            <ul class="file-list" style="display:none; margin-left: 0;">
+                                {{ render_tree(node.children, level+1) }}
+                            </ul>
+                        </li>
+                    {% else %}
+                        <li class="file" draggable="true" data-path="{{ node.path }}">
+                            <span class="file-icon">📄</span>
+                            <a href="#" class="file-link" data-doc-path="{{ node.path }}">{{ node.name }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            {% endmacro %}
+            {{ render_tree(doc_tree) }}
+        </ul>
+    </aside>
+    <div class="page-main-container container" id="editor-panel" style="display:none;">
+        <form id="doc-form" autocomplete="off">
+            <header class="editor-header">
+                <input type="text" id="title" name="title" class="editor-title" placeholder="Document Title" required>
+                <span id="autosave-status" style="margin-left:0.5em; color:#47d5d0; font-size:0.97em; display:none;">Saved</span>
+            </header>
+            <label for="section" style="font-size:0.97em; margin-bottom:0.2em;">Section/Folder:</label>
+            <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference"
+                style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 220px;">
+            <div class="editor-toolbar" style="gap:0.3em; margin-bottom:0.7em;">
+                <!-- toolbar buttons here -->
+                <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><b>B</b></button>
+                <button type="button" class="toolbar-btn" data-command="italic" title="Italic"><i>I</i></button>
+                <button type="button" class="toolbar-btn" data-command="h2" title="Heading 2">H2</button>
+                <button type="button" class="toolbar-btn" data-command="code" title="Code Block">{"</>"}</button>
+                <button type="button" class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">• List</button>
+                <button type="button" class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">1. List</button>
+                <button type="button" class="toolbar-btn" data-command="createLink" title="Insert Link">🔗</button>
+                <button type="button" class="toolbar-btn" data-command="insertImage" title="Insert Image">🖼️</button>
+                <button type="button" class="toolbar-btn" data-command="formatBlock" data-value="blockquote" title="Blockquote">❝</button>
+                <button type="button" class="toolbar-btn" data-command="insertHorizontalRule" title="Horizontal Rule">―</button>
+                <button type="button" class="toolbar-btn" data-command="undo" title="Undo">⎌</button>
+                <button type="button" class="toolbar-btn" data-command="redo" title="Redo">⎌⎌</button>
+            </div>
+            <label for="tags" style="font-size:0.97em; margin-bottom:0.2em;">Tags:</label>
+            <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api"
+                style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 320px;">
+            <label for="content" style="font-size:0.97em; margin-bottom:0.2em;">Content:</label>
+            <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content"
+                style="font-size:0.98em; min-height:180px; padding:1em 0.7em; border-radius:8px; border:1.5px solid #929aab;">
+            </div>
+            <textarea id="content" name="content" style="display:none;" required></textarea>
+            <div class="editor-footer" style="margin-top:0.5em; color:#929aab; font-size:0.95em; text-align:right;">
+                <span id="word-count">0 words</span>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}

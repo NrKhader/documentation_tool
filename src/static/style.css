@@ -204,13 +204,16 @@ search-form button {
 }
 
 .sidebar {
-    min-width: 230px;
-    max-width: 270px;
+    font-size: 0.97em;
+    line-height: 1.5;
+    letter-spacing: 0.01em;
+    padding: 1.2em 0.7em 1.2em 1.1em;
+    min-width: 180px;
+    max-width: 240px;
     background: #d3d5fd;
     color: #474a56;
     border-radius: 14px 0 0 14px;
     box-shadow: 0 2px 12px rgba(71,74,86,0.10);
-    padding: 2em 1.2em 2em 1.7em;
     margin: 0;
     height: 100vh;
     position: sticky;
@@ -227,8 +230,7 @@ search-form button {
 
 body.dark-mode .sidebar {
     background: #23272f;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.18);
-    border-right: 2px solid #39315b;
+    color: #d3d5fd;
 }
 
 .sidebar-title {
@@ -736,7 +738,7 @@ input[type="text"]:focus, textarea:focus {
     border-radius: 8px;
     border: 1.5px solid #929aab;
     background: #23272f;
-    color: #d3d5fd;
+    color: #d5fd;
     transition: background 0.2s, color 0.2s;
 }
 
@@ -760,25 +762,89 @@ input[type="text"]:focus, textarea:focus {
     margin: 0;
 }
 
-.folder, .file {
-    padding: 0.3em 0.7em;
+.folder {
+    display: block;
+    margin-bottom: 0.2em;
+}
+
+.folder-header {
+    font-size: 1em;
+    font-weight: 700;
+    color: #39315b;
+    padding: 0.35em 0.2em 0.25em 0.4em;
+    background: #e6f0fa;
     border-radius: 6px;
+    margin-bottom: 0.1em;
+    cursor: pointer;
     transition: background 0.15s;
-    font-size: 1.04em;
+    position: relative;
+}
+
+body.dark-mode .folder-header {
+    background: #23272f;
+    color: #47d5d0;
+}
+
+.folder-header:hover {
+    background: #d3d5fd;
+}
+
+.file-list {
+    list-style: none;
+    margin: 0;
+    padding-left: 1.2em;
+    border-left: 2px solid #e0e3f5;
+    margin-left: 0.3em;
+}
+
+body.dark-mode .file-list {
+    border-left: 2px solid #39315b;
+}
+
+.file {
     display: flex;
     align-items: center;
     gap: 0.5em;
+    padding: 0.13em 0.2em 0.13em 0.2em;
+    border-radius: 4px;
+    font-size: 0.96em;
+    background: none;
+    border: none;
+    margin: 0.1em 0;
+    transition: background 0.15s, color 0.15s;
+    position: relative;
 }
 
-.folder:hover, .file:hover {
+.file-link {
+    color: #474a56;
+    text-decoration: none;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 0.96em;
+    padding: 0.1em 0;
+}
+
+.file:hover, .file:focus-within {
     background: #e6f7fa;
 }
 
-body.dark-mode .folder:hover, body.dark-mode .file:hover {
+body.dark-mode .file-link {
+    color: #d3d5fd;
+}
+
+body.dark-mode .file:hover, body.dark-mode .file:focus-within {
     background: #39315b;
 }
 
+/* Indent subfolders visually */
+.folder > .file-list > .folder {
+    margin-left: 0.2em;
+}
+
 .folder-label {
+    font-size: 1em;
     font-weight: 600;
     color: #39315b;
     user-select: none;

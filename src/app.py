@@ -119,6 +119,8 @@ def index():
 def page(doc_path):
     content = load_document(doc_path)
     if content is None:
+        if request.is_json or request.headers.get("X-Requested-With") == "XMLHttpRequest":
+            return jsonify({"error": "Document not found."}), 404
         flash("Document not found.", "error")
         return redirect(url_for("index"))
     section, filename = os.path.split(doc_path)
@@ -131,10 +133,18 @@ def page(doc_path):
                 tags = meta.get("tags", [])
         except Exception:
             tags = []
+    # If AJAX, return JSON for in-place editing
+    if request.is_json or request.headers.get("X-Requested-With") == "XMLHttpRequest":
+        return jsonify({
+            "title": filename.rsplit('.', 1)[0].replace('_', ' '),
+            "section": section,
+            "tags": tags,
+            "content": content
+        })
+    # Otherwise, render the page as before
     docs = list_documents()
     section_name = section if section else DEFAULT_SECTION
     section_docs = [doc for doc in docs if doc["section"] == section_name]
-    # No markdown conversion needed
     html_content = content
     return render_template(
         "page.html",

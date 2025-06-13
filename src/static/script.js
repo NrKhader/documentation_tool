@@ -239,20 +239,58 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Folder label click logic
 document.addEventListener('DOMContentLoaded', function () {
+    // Folder expand/collapse
     document.querySelectorAll('.folder-label').forEach(label => {
         label.addEventListener('click', function () {
-            const ul = label.parentElement.querySelector('ul');
+            const ul = label.closest('.folder').querySelector('.file-list');
             if (ul) {
                 ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
                 label.textContent = (ul.style.display === 'none' ? '▶️ ' : '📁 ') + label.textContent.slice(2);
             }
         });
         // Start collapsed except root
-        if (label.parentElement.parentElement.classList.contains('folder-tree')) return;
-        const ul = label.parentElement.querySelector('ul');
+        if (label.closest('.folder').parentElement.classList.contains('folder-tree')) return;
+        const ul = label.closest('.folder').querySelector('.file-list');
         if (ul) {
             ul.style.display = 'none';
             label.textContent = '▶️ ' + label.textContent.slice(2);
         }
     });
+
+    // In-place file editing
+    document.querySelectorAll('.file-link').forEach(link => {
+        link.addEventListener('click', function (e) {
+            e.preventDefault();
+            const docPath = link.dataset.docPath;
+            fetch(`/page/${docPath}`, {
+                headers: { 'X-Requested-With': 'XMLHttpRequest' }
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+                    document.getElementById('editor-panel').style.display = 'block';
+                    document.getElementById('title').value = data.title || '';
+                    document.getElementById('section').value = data.section || '';
+                    document.getElementById('tags').value = data.tags ? data.tags.map(t => `#${t}`).join(', ') : '';
+                    document.getElementById('writing-space').innerHTML = data.content || '';
+                    document.getElementById('content').value = data.content || '';
+                });
+        });
+    });
+
+    // New Document button
+    const newDocBtn = document.getElementById('new-doc-btn');
+    if (newDocBtn) {
+        newDocBtn.addEventListener('click', function () {
+            document.getElementById('editor-panel').style.display = 'block';
+            document.getElementById('title').value = '';
+            document.getElementById('section').value = '';
+            document.getElementById('tags').value = '';
+            document.getElementById('writing-space').innerHTML = '';
+            document.getElementById('content').value = '';
+        });
+    }
 });
