@@ -1,3 +1,212 @@
+/* --- Minimalistic Color Scheme --- */
+body {
+    background: #f7f8fa;
+    color: #22243a;
+    font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+}
+
+.sidebar {
+    background: #f4f6fb;
+    color: #22243a;
+    border-right: 1px solid #e3e6ee;
+}
+
+.sidebar .folder-header,
+.sidebar .folder-label {
+    background: transparent;
+    color: #22243a;
+    font-weight: 600;
+    border-radius: 7px;
+    padding: 0.45em 1em;
+    margin-bottom: 0.1em;
+    cursor: pointer;
+    transition: background 0.13s, color 0.13s;
+}
+
+.sidebar .folder-header:hover,
+.sidebar .folder-label:hover {
+    background: #eaf2fb;
+    color: #22243a;
+}
+
+.sidebar .file-link {
+    background: transparent;
+    color: #22243a;
+    font-weight: 500;
+    border-radius: 7px;
+    padding: 0.45em 1em;
+    margin-bottom: 0.1em;
+    display: block;
+    text-align: left;
+    transition: background 0.13s, color 0.13s;
+    border: none;
+}
+
+.sidebar .file-link:hover,
+.sidebar .file-link:focus {
+    background: #eaf2fb;
+    color: #22243a;
+    outline: none;
+}
+
+.sidebar .file-link.active,
+.sidebar .file-link.selected {
+    background: #dbeafe;
+    color: #2563eb;
+    font-weight: 700;
+    border-left: 3px solid #5b9fff;
+    box-shadow: none;
+}
+
+.sidebar .folder {
+    margin-left: calc(var(--sidebar-indent, 0) * 1.2em);
+}
+.sidebar .file {
+    margin-left: calc((var(--sidebar-indent, 0) + 1) * 1.2em);
+}
+.sidebar .folder-header,
+.sidebar .folder-label,
+.sidebar .file-link {
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 0.7em !important;
+    padding-right: 0.7em !important;
+}
+
+/* Minimal border for editor area */
+#editor-panel.page-main-container.container {
+    background: #fff;
+    border-radius: 14px;
+    border: 1px solid #e3e6ee;
+    box-shadow: 0 2px 12px rgba(91,159,255,0.04);
+}
+
+/* Minimalistic buttons */
+button, .toolbar-btn, .save-btn {
+    background: #2563eb;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    padding: 0.55em 1.3em;
+    font-size: 1em;
+    font-weight: 600;
+    box-shadow: none;
+    transition: background 0.13s, color 0.13s;
+}
+
+button:hover, .toolbar-btn:hover, .save-btn:hover,
+button:focus, .toolbar-btn:focus, .save-btn:focus {
+    background: #47d5d0;
+    color: #fff;
+    outline: none;
+}
+
+/* Inputs */
+input[type="text"], textarea, select {
+    background: #f7f8fa;
+    border: 1px solid #e3e6ee;
+    color: #22243a;
+    border-radius: 7px;
+    padding: 0.7em 1.2em;
+    font-size: 1em;
+    box-shadow: none;
+    transition: border 0.13s, background 0.13s;
+}
+
+input[type="text"]:focus, textarea:focus, select:focus {
+    border: 1.5px solid #5b9fff;
+    background: #fff;
+    outline: none;
+}
+
+/* Minimalistic writing space */
+#editor-panel .writing-space {
+    background: #f7f8fa;
+    color: #22243a;
+    border-radius: 10px;
+    border: 1px solid #e3e6ee;
+    box-shadow: none;
+    padding: 2em 1.5em;
+    min-height: 40vh;
+    font-size: 1.12em;
+    transition: border 0.13s, background 0.13s;
+}
+
+#editor-panel .writing-space:focus {
+    border: 1.5px solid #5b9fff;
+    background: #fff;
+}
+
+/* --- Minimalistic Dark Mode --- */
+body.dark-mode {
+    background: #181a20;
+    color: #e3e6ee;
+}
+
+body.dark-mode .sidebar {
+    background: #23272f;
+    color: #e3e6ee;
+    border-right: 1px solid #39315b;
+}
+
+body.dark-mode .sidebar .folder-header,
+body.dark-mode .sidebar .folder-label {
+    background: transparent;
+    color: #e3e6ee;
+}
+
+body.dark-mode .sidebar .folder-header:hover,
+body.dark-mode .sidebar .folder-label:hover {
+    background: #232b3b;
+    color: #5b9fff;
+}
+
+body.dark-mode .sidebar .file-link {
+    background: transparent;
+    color: #e3e6ee;
+}
+
+body.dark-mode .sidebar .file-link:hover,
+body.dark-mode .sidebar .file-link:focus {
+    background: #232b3b;
+    color: #5b9fff;
+}
+
+body.dark-mode .sidebar .file-link.active,
+body.dark-mode .sidebar .file-link.selected {
+    background: #232b3b;
+    color: #47d5d0;
+    border-left: 3px solid #47d5d0;
+}
+
+body.dark-mode #editor-panel.page-main-container.container {
+    background: #181a20;
+    border: 1px solid #39315b;
+    box-shadow: 0 2px 12px rgba(71,213,208,0.04);
+}
+
+body.dark-mode #editor-panel .writing-space {
+    background: #23272f;
+    color: #e3e6ee;
+    border: 1px solid #39315b;
+}
+
+body.dark-mode input[type="text"], body.dark-mode textarea, body.dark-mode select {
+    background: #23272f;
+    color: #e3e6ee;
+    border: 1px solid #39315b;
+}
+
+body.dark-mode input[type="text"]:focus, body.dark-mode textarea:focus, body.dark-mode select:focus {
+    background: #23272f;
+    border: 1.5px solid #47d5d0;
+}
+
+body.dark-mode button, body.dark-mode .toolbar-btn, body.dark-mode .save-btn {
+    background: #39315b;
+    color: #fff;
+}
+
 /* --- Enhanced Professional Styling --- */
 
 /* === New Color Palette ===
@@ -9,10 +218,11 @@
 
 /* Typography & Body */
 body {
-    font-family: 'Segoe UI', 'Roboto', Arial, sans-serif;
-    font-size: 1.08em;
-    background: #d3d5fd; /* first-color */
-    color: #474a56;      /* third-color */
+    font-family: 'Inter', 'Segoe UI', 'Roboto', Arial, sans-serif;
+    font-size: 1.04em;
+    line-height: 1.7;
+    background: #f5f7fa;
+    color: #23272f;
     letter-spacing: 0.01em;
     display: flex;
     flex-direction: column;
@@ -1164,7 +1374,7 @@ body.dark-mode .sidebar .folder-label:hover {
 
 body.dark-mode .sidebar .file-link {
     background: #181a20;
-    color: #d3d5fd;
+    color: #d3d5d5;
 }
 
 .sidebar .file-link:hover {
@@ -1175,4 +1385,208 @@ body.dark-mode .sidebar .file-link {
 body.dark-mode .sidebar .file-link:hover {
     background: #39315b;
     color: #47d5d0;
+}
+
+input[type="text"], textarea, select {
+    background: #fff;
+    border: 1.5px solid #c3c8d4;
+    color: #23272f;
+    border-radius: 10px;
+    padding: 0.7em 1.2em;
+    font-size: 1em;
+    box-shadow: 0 1px 4px rgba(71,74,86,0.06);
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+input[type="text"]:focus, textarea:focus, select:focus {
+    border: 1.5px solid #5b9fff;
+    box-shadow: 0 2px 8px rgba(91,159,255,0.13);
+    outline: none;
+    background: #f0f7ff;
+}
+
+button, .toolbar-btn, .save-btn {
+    background: linear-gradient(90deg, #5b9fff 0%, #47d5d0 100%);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 0.6em 1.6em;
+    font-size: 1.08em;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(91,159,255,0.10);
+    transition: background 0.18s, box-shadow 0.18s, color 0.18s;
+}
+
+button:hover, .toolbar-btn:hover, .save-btn:hover,
+button:focus, .toolbar-btn:focus, .save-btn:focus {
+    background: linear-gradient(90deg, #47d5d0 0%, #5b9fff 100%);
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(91,159,255,0.18);
+    outline: none;
+}
+
+.sidebar .folder-header,
+.sidebar .folder-label {
+    background: #f0f7ff;
+    color: #23272f;
+    font-weight: 700;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    margin-bottom: 0.1em;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sidebar .folder-header:hover,
+.sidebar .folder-label:hover {
+    background: #d3eaff;
+    color: #1a4b7a;
+}
+
+.sidebar .file-link {
+    background: #fff;
+    color: #23272f;
+    font-weight: 500;
+    border-radius: 8px;
+    padding: 0.5em 1em;
+    margin-bottom: 0.1em;
+    display: block;
+    text-align: left;
+    transition: background 0.15s, color 0.15s;
+}
+
+.sidebar .file-link:hover, .sidebar .file-link:focus {
+    background: #e6f7fa;
+    color: #1a4b7a;
+}
+
+#editor-panel .writing-space {
+    background: #f8fafd;
+    color: #23272f;
+    border-radius: 14px;
+    border: 1.5px solid #c3c8d4;
+    box-shadow: 0 2px 16px rgba(91,159,255,0.07);
+    padding: 2em 1.5em;
+    min-height: 40vh;
+    font-size: 1.15em;
+    transition: border 0.2s, box-shadow 0.2s;
+}
+
+#editor-panel .writing-space:focus {
+    border: 1.5px solid #5b9fff;
+    box-shadow: 0 4px 24px rgba(91,159,255,0.13);
+    background: #f0f7ff;
+}
+
+label, .editor-header, .editor-toolbar, .editor-footer {
+    margin-bottom: 1.2em;
+}
+
+.editor-header {
+    margin-bottom: 2em;
+}
+
+body.dark-mode {
+    background: #181a20;
+    color: #d5fd;
+}
+
+body.dark-mode input[type="text"], body.dark-mode textarea, body.dark-mode select {
+    background: #23272f;
+    color: #d5fd;
+    border: 1.5px solid #39315b;
+}
+
+body.dark-mode input[type="text"]:focus, body.dark-mode textarea:focus, body.dark-mode select:focus {
+    background: #23272f;
+    border: 1.5px solid #47d5d0;
+    box-shadow: 0 2px 8px rgba(71,213,208,0.13);
+}
+
+body.dark-mode button, body.dark-mode .toolbar-btn, body.dark-mode .save-btn {
+    background: linear-gradient(90deg, #39315b 0%, #47d5d0 100%);
+    color: #fff;
+}
+
+body.dark-mode .sidebar .folder-header,
+body.dark-mode .sidebar .folder-label {
+    background: #23272f;
+    color: #47d5d0;
+}
+
+body.dark-mode .sidebar .folder-header:hover,
+body.dark-mode .sidebar .folder-label:hover {
+    background: #39315b;
+    color: #47d5d0;
+}
+
+body.dark-mode .sidebar .file-link {
+    background: #181a20;
+    color: #d5fd;
+}
+
+body.dark-mode .sidebar .file-link:hover, body.dark-mode .sidebar .file-link:focus {
+    background: #39315b;
+    color: #47d5d0;
+}
+
+body.dark-mode #editor-panel .writing-space {
+    background: #23272f;
+    color: #fff;
+    border: 1.5px solid #39315b;
+    box-shadow: 0 2px 16px rgba(71,213,208,0.07);
+}
+
+/* Add inner margin for sidebar folder and file highlights */
+.sidebar .folder-header,
+.sidebar .folder-label,
+.sidebar .file-link {
+    padding-left: 0.7em !important;
+    padding-right: 0.7em !important;
+}
+
+/* Sidebar: Subtle highlight for hover */
+.sidebar .folder-header:hover,
+.sidebar .folder-label:hover,
+.sidebar .file-link:hover,
+.sidebar .file-link:focus {
+    background: #c2c6e6; /* just a shade darker than #d3d5fd */
+    color: #23272f;
+}
+
+/* Sidebar: Special highlight for selected/active document */
+.sidebar .file-link.active,
+.sidebar .file-link.selected {
+    background: #929aab;   /* second-color, more contrast */
+    color: #fff;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(71,74,86,0.10);
+}
+
+body.dark-mode .sidebar .file-link.active,
+body.dark-mode .sidebar .file-link.selected {
+    background: #39315b;
+    color: #47d5d0;
+    font-weight: 700;
+    box-shadow: 0 2px 8px rgba(71,213,208,0.10);
+}
+
+/* Indentation for subdirectories and files in the sidebar */
+.sidebar .folder {
+    margin-left: calc(var(--sidebar-indent, 0) * 1.2em);
+}
+.sidebar .file {
+    margin-left: calc((var(--sidebar-indent, 0) + 1) * 1.2em);
+}
+/* Ensure folder-header and file-link fill the available width */
+.sidebar .folder-header,
+.sidebar .folder-label,
+.sidebar .file-link {
+    width: 100%;
+    box-sizing: border-box;
+}
+.sidebar > ul.folder-tree > .folder,
+.sidebar > ul.folder-tree > .file {
+    margin-left: 0 !important;
 }

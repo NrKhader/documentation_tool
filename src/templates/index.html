@@ -1,26 +1,30 @@
 {% extends "base.html" %}
-{% block title %}Documentation Tool{% endblock %}
+{% block title %}{{ title }} - Documentation Tool{% endblock %}
 {% block content %}
 <div class="page-flex">
-    <aside class="sidebar" style="min-width: 240px;">
-        <h4 class="sidebar-title">Folders</h4>
+    <aside class="sidebar">
+        <h4 class="sidebar-title">{{ current_section|capitalize }}</h4>
         <ul class="folder-tree">
             {% macro render_tree(tree, level=0) %}
                 {% for node in tree %}
                     {% if node.type == 'folder' %}
-                        <li class="folder" data-path="{{ node.path }}">
-                            <div class="folder-header" style="margin-left: {{ level * 10 }}px;">
+                        <li class="folder" data-path="{{ node.path }}" style="--sidebar-indent:{{ level }}">
+                            <div class="folder-header">
                                 <span class="folder-label" style="cursor:pointer;">
-                                    {{ node.name }}
+                                    {{ node.name or node.filename }}
                                 </span>
                             </div>
-                            <ul class="file-list" style="display:none; margin-left: 0;">
+                            <ul class="file-list" style="display:none;">
                                 {{ render_tree(node.children, level+1) }}
                             </ul>
                         </li>
                     {% else %}
-                        <li class="file" draggable="true" data-path="{{ node.path }}">
-                            <a href="#" class="file-link" data-doc-path="{{ node.path }}">{{ node.name }}</a>
+                        <li class="file" draggable="true" data-path="{{ node.path }}" style="--sidebar-indent:{{ level }}">
+                            <a href="{{ url_for('page', doc_path=node.path) }}"
+                            class="file-link{% if node.path == current_doc_path %} active{% endif %}"
+                            data-doc-path="{{ node.path }}">
+                                {{ node.filename or node.name }}
+                            </a>
                         </li>
                     {% endif %}
                 {% endfor %}

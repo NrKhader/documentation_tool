@@ -41,12 +41,8 @@ def list_documents():
         rel_root = os.path.relpath(root, DOCUMENTS_DIR)
         for f in files:
             if f.endswith(".html"):
-                if rel_root == ".":
-                    section = DEFAULT_SECTION
-                    path = f
-                else:
-                    section = rel_root
-                    path = os.path.join(section, f)
+                section = rel_root if rel_root != "." else DEFAULT_SECTION
+                path = os.path.join(section, f).replace(os.sep, "/")
                 # Load tags if meta file exists
                 meta_path = get_meta_path(section, f)
                 tags = []
@@ -64,8 +60,12 @@ def list_documents():
 
 
 def load_document(path):
-    full_path = os.path.join(DOCUMENTS_DIR, path)
+    safe_path = path.replace("/", os.sep)
+    full_path = os.path.join(DOCUMENTS_DIR, safe_path)
+    print(f"Trying to load: {full_path}")  # DEBUG
+    print(f"Loading document from: {full_path}")  # DEBUG
     if not os.path.exists(full_path):
+        print("File does not exist!")      # DEBUG
         return None
     with open(full_path, "r", encoding="utf-8") as f:
         return f.read()
@@ -88,23 +88,25 @@ def save_document(section, filename, content, tags=None):
             json.dump({"tags": tags}, meta_file)
 
 
-def build_tree(root_dir):
+def build_tree(root_dir, rel_path=""):
     tree = []
-    for entry in sorted(os.listdir(root_dir)):
-        path = os.path.join(root_dir, entry)
-        rel_path = os.path.relpath(path, DOCUMENTS_DIR)
-        if os.path.isdir(path):
+    for entry in sorted(os.listdir(os.path.join(root_dir, rel_path))):
+        full_path = os.path.join(root_dir, rel_path, entry)
+        entry_rel_path = os.path.join(rel_path, entry) if rel_path else entry
+        entry_rel_path_url = entry_rel_path.replace(os.sep, "/")
+        if os.path.isdir(full_path):
             tree.append({
                 "type": "folder",
                 "name": entry,
-                "path": rel_path,
-                "children": build_tree(path)
+                "path": entry_rel_path_url,
+                "children": build_tree(root_dir, entry_rel_path)
             })
         elif entry.endswith(".html"):
             tree.append({
                 "type": "file",
+                "filename": entry,
                 "name": entry,
-                "path": rel_path
+                "path": entry_rel_path_url
             })
     return tree
 
@@ -117,6 +119,7 @@ def index():
 
 @app.route("/page/<path:doc_path>")
 def page(doc_path):
+    print(f"Requested doc_path: {doc_path}")  # DEBUG
     content = load_document(doc_path)
     if content is None:
         if request.is_json or request.headers.get("X-Requested-With") == "XMLHttpRequest":
@@ -153,6 +156,8 @@ def page(doc_path):
         tags=tags,
         current_section=section_name,
         current_doc=filename,
+        current_doc_path=doc_path,
+        doc_tree=build_tree(DOCUMENTS_DIR),
         section_docs=section_docs,
     )
 

@@ -4,10 +4,14 @@
 <div class="page-flex">
     <aside class="sidebar">
         <h4 class="sidebar-title">{{ current_section|capitalize }}</h4>
+        <!-- filepath: /Users/nkhader/projects/documentation_tool/documentation_tool/src/templates/edit.html -->
         <ul class="sidebar-list">
             {% for doc in section_docs %}
-                <li {% if doc.filename == current_doc %}class="active"{% endif %}>
-                    <a href="{{ url_for('page', doc_path=doc.path) }}">{{ doc.filename }}</a>
+                <li class="file" style="--sidebar-indent:0">
+                    <a href="{{ url_for('page', doc_path=doc.path) }}"
+                       class="file-link{% if doc.path == current_doc_path %} active{% endif %}">
+                        {{ doc.filename or doc.name }}
+                    </a>
                 </li>
             {% endfor %}
         </ul>

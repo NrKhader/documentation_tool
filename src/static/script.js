@@ -263,7 +263,17 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.file-link').forEach(link => {
         link.addEventListener('click', function (e) {
             e.preventDefault();
+
+            // Remove 'active' from all file links
+            document.querySelectorAll('.file-link.active').forEach(el => el.classList.remove('active'));
+            // Add 'active' to the clicked link
+            link.classList.add('active');
+
             const docPath = link.dataset.docPath;
+            if (!docPath) {
+                alert("Error: docPath is undefined!");
+                return;
+            }
             fetch(`/page/${docPath}`, {
                 headers: { 'X-Requested-With': 'XMLHttpRequest' }
             })

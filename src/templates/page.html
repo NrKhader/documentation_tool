@@ -4,12 +4,9 @@
 <div class="page-flex">
     <aside class="sidebar">
         <h4 class="sidebar-title">{{ current_section|capitalize }}</h4>
-        <ul class="sidebar-list">
-            {% for doc in section_docs %}
-                <li {% if doc.filename == current_doc %}class="active"{% endif %}>
-                    <a href="{{ url_for('page', doc_path=doc.path) }}">{{ doc.filename }}</a>
-                </li>
-            {% endfor %}
+        <ul class="folder-tree">
+            {% import 'index.html' as macros %}
+            {{ macros.render_tree(doc_tree, 0) }}
         </ul>
     </aside>
     <div class="page-main-container container">
