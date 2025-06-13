@@ -179,7 +179,7 @@ def new_document():
             flash("Title is required.", "error")
             return redirect(url_for("new_document"))
         save_document(section, filename, content, tags)
-        doc_path = os.path.join(section if section else DEFAULT_SECTION, filename)
+        doc_path = os.path.join(section if section else DEFAULT_SECTION, filename).replace(os.sep, "/")
         flash("Document created successfully.", "success")
         return redirect(url_for("page", doc_path=doc_path))
     return render_template("new.html")

@@ -5,31 +5,8 @@
     <aside class="sidebar">
         <h4 class="sidebar-title">{{ current_section|capitalize }}</h4>
         <ul class="folder-tree">
-            {% macro render_tree(tree, level=0) %}
-                {% for node in tree %}
-                    {% if node.type == 'folder' %}
-                        <li class="folder" data-path="{{ node.path }}" style="--sidebar-indent:{{ level }}">
-                            <div class="folder-header">
-                                <span class="folder-label" style="cursor:pointer;">
-                                    {{ node.name or node.filename }}
-                                </span>
-                            </div>
-                            <ul class="file-list" style="display:none;">
-                                {{ render_tree(node.children, level+1) }}
-                            </ul>
-                        </li>
-                    {% else %}
-                        <li class="file" draggable="true" data-path="{{ node.path }}" style="--sidebar-indent:{{ level }}">
-                            <a href="{{ url_for('page', doc_path=node.path) }}"
-                            class="file-link{% if node.path == current_doc_path %} active{% endif %}"
-                            data-doc-path="{{ node.path }}">
-                                {{ node.filename or node.name }}
-                            </a>
-                        </li>
-                    {% endif %}
-                {% endfor %}
-            {% endmacro %}
-            {{ render_tree(doc_tree) }}
+            {% import 'macros/sidebar_macros.html' as macros %}
+            {{ macros.render_tree(doc_tree, 0, current_doc_path) }}
         </ul>
     </aside>
     <div class="page-main-container container" id="editor-panel" style="display:none;">

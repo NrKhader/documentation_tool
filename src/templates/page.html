@@ -5,8 +5,8 @@
     <aside class="sidebar">
         <h4 class="sidebar-title">{{ current_section|capitalize }}</h4>
         <ul class="folder-tree">
-            {% import 'index.html' as macros %}
-            {{ macros.render_tree(doc_tree, 0) }}
+            {% import 'macros/sidebar_macros.html' as macros %}
+            {{ macros.render_tree(doc_tree, 0, current_doc_path) }}
         </ul>
     </aside>
     <div class="page-main-container container">

@@ -1,0 +1,25 @@
+{# filepath: src/templates/macros/sidebar_macros.html #}
+{% macro render_tree(tree, level=0, current_doc_path="") %}
+    {% for node in tree %}
+        {% if node.type == 'folder' %}
+            <li class="folder" data-path="{{ node.path }}" style="--sidebar-indent:{{ level }}">
+                <div class="folder-header">
+                    <span class="folder-label" style="cursor:pointer;">
+                        {{ node.name or node.filename }}
+                    </span>
+                </div>
+                <ul class="file-list" style="display:none;">
+                    {{ render_tree(node.children, level+1, current_doc_path) }}
+                </ul>
+            </li>
+        {% else %}
+            <li class="file" draggable="true" data-path="{{ node.path }}" style="--sidebar-indent:{{ level }}">
+                <a href="{{ url_for('page', doc_path=node.path) }}"
+                   class="file-link{% if node.path == current_doc_path %} active{% endif %}"
+                   data-doc-path="{{ node.path }}">
+                    {{ node.filename or node.name }}
+                </a>
+            </li>
+        {% endif %}
+    {% endfor %}
+{% endmacro %}
