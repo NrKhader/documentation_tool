@@ -88,13 +88,31 @@ def save_document(section, filename, content, tags=None):
             json.dump({"tags": tags}, meta_file)
 
 
+def build_tree(root_dir):
+    tree = []
+    for entry in sorted(os.listdir(root_dir)):
+        path = os.path.join(root_dir, entry)
+        rel_path = os.path.relpath(path, DOCUMENTS_DIR)
+        if os.path.isdir(path):
+            tree.append({
+                "type": "folder",
+                "name": entry,
+                "path": rel_path,
+                "children": build_tree(path)
+            })
+        elif entry.endswith(".html"):
+            tree.append({
+                "type": "file",
+                "name": entry,
+                "path": rel_path
+            })
+    return tree
+
+
 @app.route("/")
 def index():
-    docs = list_documents()
-    grouped = {}
-    for doc in docs:
-        grouped.setdefault(doc["section"], []).append(doc)
-    return render_template("index.html", grouped_documents=grouped)
+    doc_tree = build_tree(DOCUMENTS_DIR)
+    return render_template("index.html", doc_tree=doc_tree)
 
 
 @app.route("/page/<path:doc_path>")
@@ -266,6 +284,23 @@ def autosave_document():
     save_document(section, filename, content, tags)
     doc_path = os.path.join(section if section else DEFAULT_SECTION, filename)
     return jsonify({"success": True, "doc_path": doc_path})
+
+@app.route("/move_document", methods=["POST"])
+def move_document():
+    data = request.get_json()
+    file_path = data["file_path"]
+    target_folder = data["target_folder"]
+    src = os.path.join(DOCUMENTS_DIR, file_path)
+    dst_dir = os.path.join(DOCUMENTS_DIR, target_folder)
+    os.makedirs(dst_dir, exist_ok=True)
+    dst = os.path.join(dst_dir, os.path.basename(file_path))
+    os.rename(src, dst)
+    # Move meta file if exists
+    meta_src = src + ".meta.json"
+    meta_dst = dst + ".meta.json"
+    if os.path.exists(meta_src):
+        os.rename(meta_src, meta_dst)
+    return jsonify(success=True)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

@@ -1,32 +1,29 @@
-<!-- filepath: /Users/nkhader/projects/documentation_tool/documentation_tool/src/templates/index.html -->
 {% extends "base.html" %}
 {% block title %}Documentation Tool{% endblock %}
 {% block content %}
 <div class="container">
     <h2 style="margin-bottom: 1.2em;">Documents</h2>
-    <ul class="section-dropdown-list">
-        {% for section, docs in grouped_documents.items() %}
-        <li class="section-dropdown">
-            <button class="section-toggle" aria-expanded="false">
-                {{ section if section else "Uncategorized" }}
-            </button>
-            <ul class="doc-list" style="display: none;">
-                {% for doc in docs %}
-                <li>
-                    <a class="doc-link" href="{{ url_for('page', doc_path=doc.path) }}">{{ doc.filename }}</a>
-                    {% if doc.tags %}
-                        <span class="tag-list">
-                        {% for tag in doc.tags %}
-                            <span class="tag">#{{ tag }}</span>
-                        {% endfor %}
+    <ul class="folder-tree">
+        {% macro render_tree(tree, level=0) %}
+            {% for node in tree %}
+                {% if node.type == 'folder' %}
+                    <li class="folder" data-path="{{ node.path }}" style="margin-left: {{ level * 18 }}px;">
+                        <span class="folder-label" style="cursor:pointer;">
+                            📁 {{ node.name }}
                         </span>
-                    {% endif %}
-                    <a class="edit-link" href="{{ url_for('edit_document', doc_path=doc.path) }}">Edit</a>
-                </li>
-                {% endfor %}
-            </ul>
-        </li>
-        {% endfor %}
+                        <ul style="margin-left: 0;">
+                            {{ render_tree(node.children, level+1) }}
+                        </ul>
+                    </li>
+                {% else %}
+                    <li class="file" draggable="true" data-path="{{ node.path }}" style="margin-left: {{ level * 18 }}px;">
+                        <span style="margin-right: 6px;">📄</span>
+                        <a href="{{ url_for('page', doc_path=node.path) }}">{{ node.name }}</a>
+                    </li>
+                {% endif %}
+            {% endfor %}
+        {% endmacro %}
+        {{ render_tree(doc_tree) }}
     </ul>
 </div>
 {% endblock %}

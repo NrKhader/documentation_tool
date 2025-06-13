@@ -207,3 +207,52 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+// Drag and drop logic for files and folders
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.file[draggable="true"]').forEach(file => {
+        file.addEventListener('dragstart', function (e) {
+            e.dataTransfer.setData('text/plain', file.dataset.path);
+        });
+    });
+    document.querySelectorAll('.folder').forEach(folder => {
+        folder.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            folder.classList.add('drag-over');
+        });
+        folder.addEventListener('dragleave', function (e) {
+            folder.classList.remove('drag-over');
+        });
+        folder.addEventListener('drop', function (e) {
+            e.preventDefault();
+            folder.classList.remove('drag-over');
+            const filePath = e.dataTransfer.getData('text/plain');
+            const targetFolder = folder.dataset.path;
+            fetch('/move_document', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ file_path: filePath, target_folder: targetFolder })
+            }).then(() => window.location.reload());
+        });
+    });
+});
+
+// Folder label click logic
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.folder-label').forEach(label => {
+        label.addEventListener('click', function () {
+            const ul = label.parentElement.querySelector('ul');
+            if (ul) {
+                ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
+                label.textContent = (ul.style.display === 'none' ? '▶️ ' : '📁 ') + label.textContent.slice(2);
+            }
+        });
+        // Start collapsed except root
+        if (label.parentElement.parentElement.classList.contains('folder-tree')) return;
+        const ul = label.parentElement.querySelector('ul');
+        if (ul) {
+            ul.style.display = 'none';
+            label.textContent = '▶️ ' + label.textContent.slice(2);
+        }
+    });
+});

@@ -745,3 +745,45 @@ input[type="text"]:focus, textarea:focus {
     color: #fff;
     outline: none;
 }
+
+.folder.drag-over {
+    background: #b3e5fc !important;
+    border: 2px dashed #47d5d0;
+}
+.file[draggable="true"] {
+    cursor: grab;
+}
+
+.folder-tree {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.folder, .file {
+    padding: 0.3em 0.7em;
+    border-radius: 6px;
+    transition: background 0.15s;
+    font-size: 1.04em;
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+}
+
+.folder:hover, .file:hover {
+    background: #e6f7fa;
+}
+
+body.dark-mode .folder:hover, body.dark-mode .file:hover {
+    background: #39315b;
+}
+
+.folder-label {
+    font-weight: 600;
+    color: #39315b;
+    user-select: none;
+}
+
+body.dark-mode .folder-label {
+    color: #47d5d0;
+}
