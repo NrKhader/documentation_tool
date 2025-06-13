@@ -208,54 +208,55 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-// Drag and drop logic for files and folders
-document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('.file[draggable="true"]').forEach(file => {
-        file.addEventListener('dragstart', function (e) {
-            e.dataTransfer.setData('text/plain', file.dataset.path);
-        });
-    });
-    document.querySelectorAll('.folder').forEach(folder => {
-        folder.addEventListener('dragover', function (e) {
-            e.preventDefault();
-            folder.classList.add('drag-over');
-        });
-        folder.addEventListener('dragleave', function (e) {
-            folder.classList.remove('drag-over');
-        });
-        folder.addEventListener('drop', function (e) {
-            e.preventDefault();
-            folder.classList.remove('drag-over');
-            const filePath = e.dataTransfer.getData('text/plain');
-            const targetFolder = folder.dataset.path;
-            fetch('/move_document', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ file_path: filePath, target_folder: targetFolder })
-            }).then(() => window.location.reload());
-        });
-    });
-});
-
 // Folder label click logic
 document.addEventListener('DOMContentLoaded', function () {
-    // Folder expand/collapse
-    document.querySelectorAll('.folder-label').forEach(label => {
-        label.addEventListener('click', function () {
-            const ul = label.closest('.folder').querySelector('.file-list');
-            if (ul) {
-                ul.style.display = ul.style.display === 'none' ? 'block' : 'none';
-                label.textContent = (ul.style.display === 'none' ? '▶️ ' : '📁 ') + label.textContent.slice(2);
+    function getOpenFolders() {
+        return JSON.parse(localStorage.getItem('openFolders') || '[]');
+    }
+
+    function setOpenFolders(openFolders) {
+        localStorage.setItem('openFolders', JSON.stringify(openFolders));
+    }
+
+    function toggleFolder(folderEl, folderPath) {
+        const ul = folderEl.querySelector('.file-list');
+        if (!ul) return;
+        const openFolders = getOpenFolders();
+        if (ul.style.display === 'none') {
+            ul.style.display = 'block';
+            folderEl.querySelector('.folder-label').textContent = '📁 ' + folderEl.querySelector('.folder-label').textContent.slice(2);
+            if (!openFolders.includes(folderPath)) openFolders.push(folderPath);
+        } else {
+            ul.style.display = 'none';
+            folderEl.querySelector('.folder-label').textContent = '▶️ ' + folderEl.querySelector('.folder-label').textContent.slice(2);
+            const idx = openFolders.indexOf(folderPath);
+            if (idx !== -1) openFolders.splice(idx, 1);
+        }
+        setOpenFolders(openFolders);
+    }
+
+    function restoreOpenFolders() {
+        const openFolders = getOpenFolders();
+        document.querySelectorAll('.folder').forEach(folderEl => {
+            const folderPath = folderEl.dataset.path;
+            const ul = folderEl.querySelector('.file-list');
+            const label = folderEl.querySelector('.folder-label');
+            if (openFolders.includes(folderPath) && ul) {
+                ul.style.display = 'block';
+                if (label) label.textContent = '📁 ' + label.textContent.slice(2);
             }
         });
-        // Start collapsed except root
-        if (label.closest('.folder').parentElement.classList.contains('folder-tree')) return;
-        const ul = label.closest('.folder').querySelector('.file-list');
-        if (ul) {
-            ul.style.display = 'none';
-            label.textContent = '▶️ ' + label.textContent.slice(2);
-        }
+    }
+
+    // Folder expand/collapse with state
+    document.querySelectorAll('.folder-label').forEach(label => {
+        label.addEventListener('click', function () {
+            const folderEl = label.closest('.folder');
+            const folderPath = folderEl.dataset.path;
+            toggleFolder(folderEl, folderPath);
+        });
     });
+    restoreOpenFolders();
 
     // In-place file editing
     document.querySelectorAll('.file-link').forEach(link => {
@@ -293,4 +294,36 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('content').value = '';
         });
     }
+});
+
+// Drag and drop logic for files and folders
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.file[draggable="true"]').forEach(file => {
+        file.addEventListener('dragstart', function (e) {
+            e.dataTransfer.setData('text/plain', file.dataset.path);
+        });
+    });
+    document.querySelectorAll('.folder').forEach(folder => {
+        folder.addEventListener('dragover', function (e) {
+            e.preventDefault();
+            folder.classList.add('drag-over');
+        });
+        folder.addEventListener('dragleave', function (e) {
+            folder.classList.remove('drag-over');
+        });
+        folder.addEventListener('drop', function (e) {
+            e.preventDefault();
+            folder.classList.remove('drag-over');
+            const filePath = e.dataTransfer.getData('text/plain');
+            const targetFolder = folder.dataset.path;
+            fetch('/move_document', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ file_path: filePath, target_folder: targetFolder })
+            }).then(() => {
+                // After reload, restore open folders
+                window.location.reload();
+            });
+        });
+    });
 });
