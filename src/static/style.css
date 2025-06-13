@@ -239,7 +239,6 @@ body.dark-mode .sidebar {
     margin-bottom: 1.5em;
     color: #929aab;
     letter-spacing: 0.01em;
-    /* padding-left: 0.1em; */
     width: 100%;
     border-bottom: 1px solid #929aab33;
     padding-bottom: 0.7em;
@@ -250,14 +249,17 @@ body.dark-mode .sidebar-title {
     border-bottom: 1px solid #39315b;
 }
 
-.sidebar-list {
+.sidebar-list,
+.sidebar .folder-tree {
     list-style: none;
     padding: 0;
     margin: 0;
     width: 100%;
 }
 
-.sidebar-list li {
+.sidebar-list li,
+.sidebar .folder,
+.sidebar .file {
     margin-bottom: 0.5em;
     padding: 0.6em 0.7em;
     border-radius: 6px;
@@ -271,19 +273,23 @@ body.dark-mode .sidebar-title {
 }
 
 .sidebar-list li.active,
-.sidebar-list li:hover {
+.sidebar-list li:hover,
+.sidebar .folder:hover,
+.sidebar .file:hover {
     background: #929aab22;
     color: #0b0b0d;
     font-weight: 600;
 }
 
 .sidebar-list li.active a,
-.sidebar-list li a:hover {
+.sidebar-list li a:hover,
+.sidebar .file-link:hover {
     color: #0b0b0d;
     text-decoration: underline;
 }
 
-.sidebar-list li a {
+.sidebar-list li a,
+.sidebar .file-link {
     color: #474a56;
     display: block;
     width: 100%;
@@ -294,17 +300,70 @@ body.dark-mode .sidebar-title {
 }
 
 body.dark-mode .sidebar-list li.active,
-body.dark-mode .sidebar-list li:hover {
+body.dark-mode .sidebar-list li:hover,
+body.dark-mode .sidebar .folder:hover,
+body.dark-mode .sidebar .file:hover {
     background: #39315b;
     color: #47d5d0;
 }
 
-body.dark-mode .sidebar-list li a {
+body.dark-mode .sidebar-list li a,
+body.dark-mode .sidebar .file-link {
     color: #d3d5fd;
 }
 
 body.dark-mode .sidebar-list li.active a,
-body.dark-mode .sidebar-list li a:hover {
+body.dark-mode .sidebar-list li a:hover,
+body.dark-mode .sidebar .file-link:hover {
+    color: #47d5d0;
+}
+
+.sidebar .folder-header {
+    font-size: 1em;
+    font-weight: 700;
+    color: #39315b;
+    padding: 0.35em 0.2em 0.25em 0.4em;
+    background: #e6f0fa;
+    border-radius: 6px;
+    margin-bottom: 0.1em;
+    cursor: pointer;
+    transition: background 0.15s;
+    position: relative;
+}
+
+body.dark-mode .sidebar .folder-header {
+    background: #23272f;
+    color: #47d5d0;
+}
+
+.sidebar .folder-header:hover {
+    background: #d3d5fd;
+}
+
+.sidebar .file-list {
+    list-style: none;
+    margin: 0;
+    padding-left: 1.2em;
+    border-left: 2px solid #e0e3f5;
+    margin-left: 0.3em;
+}
+
+body.dark-mode .sidebar .file-list {
+    border-left: 2px solid #39315b;
+}
+
+.sidebar .folder > .file-list > .folder {
+    margin-left: 0.2em;
+}
+
+.sidebar .folder-label {
+    font-size: 1em;
+    font-weight: 600;
+    color: #39315b;
+    user-select: none;
+}
+
+body.dark-mode .sidebar .folder-label {
     color: #47d5d0;
 }
 
@@ -684,172 +743,436 @@ body.dark-mode .section-toggle:hover {
     color: #47d5d0;
 }
 
-/* --- Editor Title Box Improvements --- */
-.editor-header {
+/* --- Enhanced Editor Area (Editing Space Only, Sidebar Unaffected) --- */
+
+#editor-panel.page-main-container.container {
+    width: 100%;
+    max-width: 1100px;
+    margin: 2.5em auto 2em auto;
+    padding: 2.5em 2.5em 2em 2.5em;
+    border-radius: 18px;
+    box-shadow: 0 4px 32px rgba(71,74,86,0.11);
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    min-height: 70vh;
+    transition: box-shadow 0.2s, background 0.2s;
+}
+
+body.dark-mode #editor-panel.page-main-container.container {
+    background: #23272f;
+    box-shadow: 0 4px 32px rgba(0,0,0,0.22);
+}
+
+#editor-panel .editor-header {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* Justify to the left */
-    margin-bottom: 1.2em;
-    gap: 1em;
+    gap: 1.2em;
+    padding: 0 0 1.2em 0;
+    background: transparent;
+    border-bottom: 1.5px solid #e0e3f5;
+    width: 100%;
+    margin-bottom: 1.5em;
 }
 
-.editor-title {
-    max-width: 320px;
-    min-width: 140px;
-    font-size: 1.13em;
-    padding: 0.5em 1.2em;
-    border-radius: 8px;
+body.dark-mode #editor-panel .editor-header {
+    border-bottom: 1.5px solid #39315b;
+}
+
+#editor-panel .editor-title {
+    flex: 1 1 0;
+    max-width: none;
+    min-width: 0;
+    font-size: 2em;
+    padding: 0.5em 1em;
+    border-radius: 10px;
     border: 1.5px solid #929aab;
-    background: #23272f; /* Dark background */
-    color: #d3d5fd;           /* <-- Make the text inside the title box light for contrast */
-    margin-right: 0.7em;
-    margin-left: 0.7em;
-    text-align: left;         /* <-- Left-align the content inside the box */
-    box-shadow: 0 2px 8px rgba(71,74,86,0.07);
-    transition: background 0.2s, color 0.2s, border 0.2s;
-}
-
-.editor-title:focus,
-.editor-title:active {
-    background: #39315b;
-    color: #fff;              /* <-- On focus, make the text even lighter */
-    border: 1.5px solid #47d5d0;
-    outline: none;
-}
-
-/* Make sure the rest of the form fields match the new darker look */
-input[type="text"], textarea {
-    background: #23272f; /* Darker background instead of #fff */
-    color: #23272f;
-    border: 1px solid #929aab;
-}
-
-input[type="text"]:focus, textarea:focus {
-    border: 1.5px solid #47d5d0;
-    background: #39315b;
-    color: #fff;
-}
-
-/* Optional: Adjust writing space for a darker look */
-.writing-space {
-    font-size: 0.98em;
-    min-height: 180px;
-    padding: 1em 0.7em;
-    border-radius: 8px;
-    border: 1.5px solid #929aab;
-    background: #23272f;
-    color: #d5fd;
-    transition: background 0.2s, color 0.2s;
-}
-
-.writing-space:focus {
-    background: #39315b;
-    color: #fff;
-    outline: none;
-}
-
-.folder.drag-over {
-    background: #b3e5fc !important;
-    border: 2px dashed #47d5d0;
-}
-.file[draggable="true"] {
-    cursor: grab;
-}
-
-.folder-tree {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-}
-
-.folder {
-    display: block;
-    margin-bottom: 0.2em;
-}
-
-.folder-header {
-    font-size: 1em;
-    font-weight: 700;
+    background: #f8f9ff;
     color: #39315b;
-    padding: 0.35em 0.2em 0.25em 0.4em;
+    margin: 0;
+    box-shadow: 0 2px 8px rgba(71,74,86,0.07);
+    outline: none;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    transition: border 0.2s, background 0.2s, color 0.2s;
+}
+
+body.dark-mode #editor-panel .editor-title {
+    background: #23272f;
+    color: #fff;
+    border: 1.5px solid #39315b;
+}
+
+#editor-panel .editor-title:focus,
+#editor-panel .editor-title:active {
+    background: #e6f7fa;
+    color: #23272f;
+    border: 1.5px solid #47d5d0;
+    outline: none;
+}
+
+body.dark-mode #editor-panel .editor-title:focus,
+body.dark-mode #editor-panel .editor-title:active {
+    background: #39315b;
+    color: #fff;
+    border: 1.5px solid #47d5d0;
+}
+
+#editor-panel .editor-toolbar {
+    display: flex;
+    gap: 0.5em;
+    padding: 1em 0 1em 0;
+    background: transparent;
+    border-bottom: 1.5px solid #e0e3f5;
+    width: 100%;
+    margin-bottom: 1.5em;
+}
+
+body.dark-mode #editor-panel .editor-toolbar {
+    border-bottom: 1.5px solid #39315b;
+}
+
+#editor-panel .toolbar-btn {
+    background: #f8f9ff;
+    color: #39315b;
+    border: 1.5px solid #e0e3f5;
+    border-radius: 8px;
+    padding: 0.5em 1.1em;
+    font-size: 1.08em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border 0.15s;
+    margin: 0;
+    box-shadow: 0 1px 4px rgba(71,74,86,0.08);
+}
+
+#editor-panel .toolbar-btn:hover, #editor-panel .toolbar-btn:focus {
+    background: #e6f7fa;
+    color: #47d5d0;
+    border: 1.5px solid #47d5d0;
+    outline: none;
+}
+
+body.dark-mode #editor-panel .toolbar-btn {
+    background: #23272f;
+    color: #d3d5fd;
+    border: 1.5px solid #39315b;
+}
+
+body.dark-mode #editor-panel .toolbar-btn:hover, body.dark-mode #editor-panel .toolbar-btn:focus {
+    background: #39315b;
+    color: #47d5d0;
+    border: 1.5px solid #47d5d0;
+}
+
+#editor-panel form label {
+    font-size: 1.08em;
+    font-weight: 500;
+    margin: 2em 0 0.3em 0;
+    display: block;
+    color: #39315b;
+}
+
+body.dark-mode #editor-panel form label {
+    color: #d3d5fd;
+}
+
+#editor-panel #section,
+#editor-panel #tags {
+    display: block;
+    width: 70%;
+    max-width: 900px;
+    margin: 0 0 1.2em 0;
+    padding: 0.7em 1.2em;
+    border-radius: 10px;
+    border: 1.5px solid #929aab;
+    background: #f8f9ff;
+    color: #39315b;
+    font-size: 1.08em;
+    box-shadow: 0 1px 4px rgba(71,74,86,0.08);
+    outline: none;
+    transition: border 0.2s, background 0.2s, color 0.2s;
+}
+
+body.dark-mode #editor-panel #section,
+body.dark-mode #editor-panel #tags {
+    background: #23272f;
+    color: #fff;
+    border: 1.5px solid #39315b;
+}
+
+#editor-panel #section:focus,
+#editor-panel #tags:focus {
+    background: #e6f7fa;
+    color: #23272f;
+    border: 1.5px solid #47d5d0;
+    outline: none;
+}
+
+body.dark-mode #editor-panel #section:focus,
+body.dark-mode #editor-panel #tags:focus {
+    background: #39315b;
+    color: #fff;
+    border: 1.5px solid #47d5d0;
+}
+
+#editor-panel .writing-space {
+    width: 100%;
+    min-height: 40vh;
+    margin: 2em 0 0 0;
+    padding: 2em 1.5em;
+    border-radius: 14px;
+    border: 1.5px solid #929aab;
+    background: #fff;
+    color: #23272f;
+    font-size: 1.18em;
+    line-height: 1.7;
+    box-shadow: 0 2px 16px rgba(71,74,86,0.09);
+    outline: none;
+    resize: none;
+    transition: border 0.2s, background 0.2s, color 0.2s;
+}
+
+body.dark-mode #editor-panel .writing-space {
+    background: #23272f;
+    color: #fff;
+    border: 1.5px solid #39315b;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+}
+
+#editor-panel .writing-space:focus {
+    background: #e6f7fa;
+    color: #23272f;
+    border: 1.5px solid #47d5d0;
+    outline: none;
+}
+
+body.dark-mode #editor-panel .writing-space:focus {
+    background: #39315b;
+    color: #fff;
+    border: 1.5px solid #47d5d0;
+}
+
+#editor-panel .editor-footer {
+    margin: 1.5em 0 0 0;
+    color: #929aab;
+    font-size: 1.05em;
+    text-align: right;
+    width: 100%;
+    padding-right: 0;
+}
+
+/* --- Sidebar Styles: Isolated --- */
+.sidebar,
+.sidebar * {
+    font-size: 0.97em !important;
+    /* All other sidebar-specific styles remain here */
+}
+
+/* Remove global font-size for input[type="text"], textarea, etc. */
+/* Instead, scope them if needed: */
+.sidebar input[type="text"],
+.sidebar textarea {
+    /* Sidebar-specific input/textarea styles (if any) */
+}
+
+/* --- Editor/Main Content Styles: Reset font-size --- */
+#editor-panel,
+#editor-panel * {
+    font-size: 1em !important;
+}
+
+/* If you want to further control the writing space font size: */
+#editor-panel .writing-space {
+    font-size: 1.18em !important;
+}
+
+/* If you want to control the title font size: */
+#editor-panel .editor-title {
+    font-size: 2em !important;
+}
+
+/* If you want to control the toolbar button font size: */
+#editor-panel .toolbar-btn {
+    font-size: 1.08em !important;
+}
+
+/* Remove or adjust any global [type="text"] rules that are not sidebar-specific */
+input[type="text"], textarea {
+    font-size: 1em;
+}
+
+/* If you want to keep the rest of your editor enhancements, leave them as-is below this block */
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    #editor-panel.page-main-container.container {
+        max-width: 98vw;
+        padding: 1.5em 1vw;
+    }
+    #editor-panel #section,
+    #editor-panel #tags {
+        width: 95%;
+    }
+}
+
+@media (max-width: 900px) {
+    #editor-panel.page-main-container.container {
+        max-width: 100vw;
+        padding: 1em 0.5em;
+    }
+    #editor-panel .editor-header,
+    #editor-panel .editor-toolbar,
+    #editor-panel .writing-space,
+    #editor-panel form label,
+    #editor-panel #section,
+    #editor-panel #tags,
+    #editor-panel .editor-footer {
+        padding-left: 0;
+        padding-right: 0;
+        margin-left: 0;
+        margin-right: 0;
+        width: 100%;
+        max-width: none;
+    }
+    #editor-panel #section,
+    #editor-panel #tags {
+        width: 100%;
+        max-width: none;
+    }
+    #editor-panel .writing-space {
+        width: 100%;
+        min-height: 30vh;
+        padding: 1em 0.5em;
+    }
+}
+
+@media (max-width: 600px) {
+    #editor-panel .editor-header,
+    #editor-panel .editor-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5em;
+        padding: 0.5em 0;
+    }
+    #editor-panel .writing-space {
+        padding: 0.5em 0.2em;
+        font-size: 1em;
+    }
+    #editor-panel #section,
+    #editor-panel #tags {
+        font-size: 1em;
+        padding: 0.5em 0.7em;
+    }
+}
+
+/* --- Sidebar Styles: Remove emojis/icons, align text left, no extra padding --- */
+.sidebar .folder-header,
+.sidebar .folder-label,
+.sidebar .file-link {
+    /* Remove emojis/icons by not rendering them in the template, but also: */
+    background: none;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    text-align: left !important;
+    display: block;
+    font-size: 1em;
+    font-weight: 600;
+    color: #39315b;
+    margin-left: 0 !important;
+    gap: 0 !important;
+}
+
+body.dark-mode .sidebar .folder-header,
+body.dark-mode .sidebar .folder-label,
+body.dark-mode .sidebar .file-link {
+    color: #47d5d0;
+}
+
+.sidebar .file-list {
+    padding-left: 0 !important;
+    border-left: none !important;
+    margin-left: 0 !important;
+}
+
+.sidebar .folder,
+.sidebar .file {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    text-align: left !important;
+}
+
+.sidebar .folder-header:hover,
+.sidebar .file-link:hover {
+    background: #e6f7fa;
+    color: #47d5d0;
+}
+
+body.dark-mode .sidebar .folder-header:hover,
+body.dark-mode .sidebar .file-link:hover {
+    background: #39315b;
+    color: #47d5d0;
+}
+
+/* --- Sidebar: Differentiate Folders and Files --- */
+.sidebar .folder-header,
+.sidebar .folder-label {
     background: #e6f0fa;
+    color: #39315b;
+    font-weight: 700;
     border-radius: 6px;
+    padding: 0.4em 0.7em;
     margin-bottom: 0.1em;
     cursor: pointer;
-    transition: background 0.15s;
-    position: relative;
+    transition: background 0.15s, color 0.15s;
+    text-align: left !important;
+    display: block;
 }
 
-body.dark-mode .folder-header {
+body.dark-mode .sidebar .folder-header,
+body.dark-mode .sidebar .folder-label {
     background: #23272f;
     color: #47d5d0;
 }
 
-.folder-header:hover {
+.sidebar .folder-header:hover,
+.sidebar .folder-label:hover {
     background: #d3d5fd;
+    color: #23272f;
 }
 
-.file-list {
-    list-style: none;
-    margin: 0;
-    padding-left: 1.2em;
-    border-left: 2px solid #e0e3f5;
-    margin-left: 0.3em;
+body.dark-mode .sidebar .folder-header:hover,
+body.dark-mode .sidebar .folder-label:hover {
+    background: #39315b;
+    color: #47d5d0;
 }
 
-body.dark-mode .file-list {
-    border-left: 2px solid #39315b;
-}
-
-.file {
-    display: flex;
-    align-items: center;
-    gap: 0.5em;
-    padding: 0.13em 0.2em 0.13em 0.2em;
-    border-radius: 4px;
-    font-size: 0.96em;
-    background: none;
-    border: none;
-    margin: 0.1em 0;
-    transition: background 0.15s, color 0.15s;
-    position: relative;
-}
-
-.file-link {
+.sidebar .file-link {
+    background: #fff;
     color: #474a56;
-    text-decoration: none;
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 0.96em;
-    padding: 0.1em 0;
+    font-weight: 500;
+    border-radius: 6px;
+    padding: 0.4em 0.7em;
+    margin-bottom: 0.1em;
+    display: block;
+    text-align: left !important;
+    transition: background 0.15s, color 0.15s;
 }
 
-.file:hover, .file:focus-within {
-    background: #e6f7fa;
-}
-
-body.dark-mode .file-link {
+body.dark-mode .sidebar .file-link {
+    background: #181a20;
     color: #d3d5fd;
 }
 
-body.dark-mode .file:hover, body.dark-mode .file:focus-within {
-    background: #39315b;
-}
-
-/* Indent subfolders visually */
-.folder > .file-list > .folder {
-    margin-left: 0.2em;
-}
-
-.folder-label {
-    font-size: 1em;
-    font-weight: 600;
+.sidebar .file-link:hover {
+    background: #e6f7fa;
     color: #39315b;
-    user-select: none;
 }
 
-body.dark-mode .folder-label {
+body.dark-mode .sidebar .file-link:hover {
+    background: #39315b;
     color: #47d5d0;
 }

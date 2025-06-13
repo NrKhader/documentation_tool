@@ -11,7 +11,7 @@
                         <li class="folder" data-path="{{ node.path }}">
                             <div class="folder-header" style="margin-left: {{ level * 10 }}px;">
                                 <span class="folder-label" style="cursor:pointer;">
-                                    ▶️ {{ node.name }}
+                                    {{ node.name }}
                                 </span>
                             </div>
                             <ul class="file-list" style="display:none; margin-left: 0;">
@@ -20,7 +20,6 @@
                         </li>
                     {% else %}
                         <li class="file" draggable="true" data-path="{{ node.path }}">
-                            <span class="file-icon">📄</span>
                             <a href="#" class="file-link" data-doc-path="{{ node.path }}">{{ node.name }}</a>
                         </li>
                     {% endif %}

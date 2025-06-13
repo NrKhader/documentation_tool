@@ -222,13 +222,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const ul = folderEl.querySelector('.file-list');
         if (!ul) return;
         const openFolders = getOpenFolders();
+        const label = folderEl.querySelector('.folder-label');
         if (ul.style.display === 'none') {
             ul.style.display = 'block';
-            folderEl.querySelector('.folder-label').textContent = '📁 ' + folderEl.querySelector('.folder-label').textContent.slice(2);
+            if (label) label.textContent = label.textContent.trim();
             if (!openFolders.includes(folderPath)) openFolders.push(folderPath);
         } else {
             ul.style.display = 'none';
-            folderEl.querySelector('.folder-label').textContent = '▶️ ' + folderEl.querySelector('.folder-label').textContent.slice(2);
+            if (label) label.textContent = label.textContent.trim();
             const idx = openFolders.indexOf(folderPath);
             if (idx !== -1) openFolders.splice(idx, 1);
         }
@@ -243,7 +244,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const label = folderEl.querySelector('.folder-label');
             if (openFolders.includes(folderPath) && ul) {
                 ul.style.display = 'block';
-                if (label) label.textContent = '📁 ' + label.textContent.slice(2);
+                if (label) label.textContent = label.textContent.trim();
             }
         });
     }
