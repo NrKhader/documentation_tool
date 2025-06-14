@@ -1,57 +1,59 @@
 {% extends "base.html" %}
 {% block title %}New Document - Documentation Tool{% endblock %}
 {% block content %}
-<div class="page-flex">
-    <aside class="sidebar">
+<div class="page-flex" style="min-height: 90vh; width: 100vw; max-width: 100vw; margin: 0; padding: 0;">
+    <aside class="sidebar" style="height: 100vh; min-width: 220px; max-width: 320px;" aria-label="Sections Sidebar">
         <h4 class="sidebar-title">Sections</h4>
+        <ul class="folder-tree">
+            {% import 'macros/sidebar_macros.html' as macros %}
+            {{ macros.render_tree(doc_tree, 0, "") }}
+        </ul>
         <div class="sidebar-actions">
             <a href="{{ url_for('index') }}" class="edit-btn" style="margin-top:1em;">← Back to Home</a>
         </div>
     </aside>
-    <div class="page-main-container container">
-        <main>
-            <form method="post" id="doc-form" autocomplete="off">
-                <header class="editor-header">
-                    <input type="text" id="title" name="title" class="editor-title"
-                        placeholder="Document Title" required>
-                    <span id="autosave-status" style="margin-left:0.5em; color:#47d5d0; font-size:0.97em; display:none;">Saved</span>
-                </header>
-                <label for="section" style="font-size:0.97em; margin-bottom:0.2em;">Section/Folder:</label>
-                <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference"
-                    style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 220px;">
-                <div class="editor-toolbar" style="gap:0.3em; margin-bottom:0.7em;">
-                    <!-- toolbar buttons here -->
-                    <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><b>B</b></button>
-                    <button type="button" class="toolbar-btn" data-command="italic" title="Italic"><i>I</i></button>
-                    <button type="button" class="toolbar-btn" data-command="h2" title="Heading 2">H2</button>
-                    <button type="button" class="toolbar-btn" data-command="code" title="Code Block">{"</>"}</button>
-                    <button type="button" class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">• List</button>
-                    <button type="button" class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">1. List</button>
-                    <button type="button" class="toolbar-btn" data-command="createLink" title="Insert Link">🔗</button>
-                    <button type="button" class="toolbar-btn" data-command="insertImage" title="Insert Image">🖼️</button>
-                    <button type="button" class="toolbar-btn" data-command="formatBlock" data-value="blockquote" title="Blockquote">❝</button>
-                    <button type="button" class="toolbar-btn" data-command="insertHorizontalRule" title="Horizontal Rule">―</button>
-                    <button type="button" class="toolbar-btn" data-command="undo" title="Undo">⎌</button>
-                    <button type="button" class="toolbar-btn" data-command="redo" title="Redo">⎌⎌</button>
-                </div>
-                <label for="tags" style="font-size:0.97em; margin-bottom:0.2em;">Tags:</label>
-                <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api"
-                    style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 320px;">
-                <label for="content" style="font-size:0.97em; margin-bottom:0.2em;">Content:</label>
-                <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content"
-                    style="font-size:0.98em; min-height:180px; padding:1em 0.7em; border-radius:8px; border:1.5px solid #929aab;">
-                </div>
-                <textarea id="content" name="content" style="display:none;" required></textarea>
-                <div class="editor-footer" style="margin-top:0.5em; color:#929aab; font-size:0.95em; text-align:right;">
-                    <span id="word-count">0 words</span>
-                </div>
-                <div style="display: flex; justify-content: flex-end; margin-top: 1.2em;">
-                    <button type="submit" class="save-btn">Create</button>
-                </div>
-            </form>
-        </main>
+    <div class="page-main-container container" id="editor-panel" style="flex: 1 1 0; width: 100%; max-width: 100vw; min-width: 0; margin: 0; padding: 0 2vw 0 2vw; display: flex; flex-direction: column; justify-content: flex-start;">
+        <form method="post" id="doc-form" autocomplete="off" style="width: 100%;">
+            <header class="editor-header">
+                <input type="text" id="title" name="title" class="editor-title"
+                    placeholder="Document Title" required>
+                <span id="autosave-status" style="margin-left:0.5em; color:#47d5d0; font-size:0.97em; display:none;">Saved</span>
+            </header>
+            <label for="section" style="font-size:0.97em; margin-bottom:0.2em;">Section/Folder:</label>
+            <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference"
+                style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 220px;">
+            <div class="editor-toolbar" style="gap:0.3em; margin-bottom:0.7em;">
+                <!-- toolbar buttons here -->
+                <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><b>B</b></button>
+                <button type="button" class="toolbar-btn" data-command="italic" title="Italic"><i>I</i></button>
+                <button type="button" class="toolbar-btn" data-command="h2" title="Heading 2">H2</button>
+                <button type="button" class="toolbar-btn" data-command="code" title="Code Block">{"</>"}</button>
+                <button type="button" class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">• List</button>
+                <button type="button" class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">1. List</button>
+                <button type="button" class="toolbar-btn" data-command="createLink" title="Insert Link">🔗</button>
+                <button type="button" class="toolbar-btn" data-command="insertImage" title="Insert Image">🖼️</button>
+                <button type="button" class="toolbar-btn" data-command="formatBlock" data-value="blockquote" title="Blockquote">❝</button>
+                <button type="button" class="toolbar-btn" data-command="insertHorizontalRule" title="Horizontal Rule">―</button>
+                <button type="button" class="toolbar-btn" data-command="undo" title="Undo">⎌</button>
+                <button type="button" class="toolbar-btn" data-command="redo" title="Redo">⎌⎌</button>
+            </div>
+            <label for="tags" style="font-size:0.97em; margin-bottom:0.2em;">Tags:</label>
+            <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api"
+                style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 320px;">
+            <label for="content" style="font-size:0.97em; margin-bottom:0.2em;">Content:</label>
+            <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content"
+                style="font-size:1.12em; min-height:40vh; padding:2em 1.5em; border-radius:14px; border:2px solid #47d5d0; background:#f8fafd; margin-bottom:1.5em; outline:none; box-shadow:0 2px 16px rgba(91,159,255,0.13); transition: border 0.2s, box-shadow 0.2s;">
+            </div>
+            <textarea id="content" name="content" style="display:none;" required></textarea>
+            <div class="editor-footer" style="margin-top:0.5em; color:#929aab; font-size:0.95em; text-align:right;">
+                <span id="word-count">0 words</span>
+            </div>
+            <div style="display: flex; justify-content: flex-end; margin-top: 1.2em;">
+                <button type="submit" class="save-btn">Create</button>
+            </div>
+        </form>
     </div>
-    <aside class="markdown-help notebook-cheatsheet">
+    <aside class="markdown-help notebook-cheatsheet" aria-label="Markdown Cheatsheet" style="min-width: 220px; max-width: 350px;">
         <!-- cheatsheet content -->
     </aside>
 </div>

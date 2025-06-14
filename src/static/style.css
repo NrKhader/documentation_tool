@@ -1362,13 +1362,13 @@ body.dark-mode .sidebar .folder-label:hover {
 
 .sidebar .file-link {
     background: #fff;
-    color: #474a56;
+    color: #23272f;
     font-weight: 500;
-    border-radius: 6px;
-    padding: 0.4em 0.7em;
+    border-radius: 8px;
+    padding: 0.5em 1em;
     margin-bottom: 0.1em;
     display: block;
-    text-align: left !important;
+    text-align: left;
     transition: background 0.15s, color 0.15s;
 }
 
@@ -1426,167 +1426,81 @@ button:focus, .toolbar-btn:focus, .save-btn:focus {
     outline: none;
 }
 
-.sidebar .folder-header,
-.sidebar .folder-label {
-    background: #f0f7ff;
-    color: #23272f;
-    font-weight: 700;
-    border-radius: 8px;
-    padding: 0.5em 1em;
-    margin-bottom: 0.1em;
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s;
-}
-
-.sidebar .folder-header:hover,
-.sidebar .folder-label:hover {
-    background: #d3eaff;
-    color: #1a4b7a;
-}
-
-.sidebar .file-link {
-    background: #fff;
-    color: #23272f;
-    font-weight: 500;
-    border-radius: 8px;
-    padding: 0.5em 1em;
-    margin-bottom: 0.1em;
-    display: block;
-    text-align: left;
-    transition: background 0.15s, color 0.15s;
-}
-
-.sidebar .file-link:hover, .sidebar .file-link:focus {
-    background: #e6f7fa;
-    color: #1a4b7a;
-}
-
-#editor-panel .writing-space {
+/* Writing Space Enhancements */
+.writing-space[contenteditable="true"] {
     background: #f8fafd;
-    color: #23272f;
     border-radius: 14px;
-    border: 1.5px solid #c3c8d4;
-    box-shadow: 0 2px 16px rgba(91,159,255,0.07);
-    padding: 2em 1.5em;
+    border: 2px solid #47d5d0;
     min-height: 40vh;
-    font-size: 1.15em;
+    font-size: 1.12em;
+    padding: 2em 1.5em;
+    margin-bottom: 1.5em;
+    outline: none;
+    box-shadow: 0 2px 16px rgba(91,159,255,0.13);
     transition: border 0.2s, box-shadow 0.2s;
 }
 
-#editor-panel .writing-space:focus {
-    border: 1.5px solid #5b9fff;
-    box-shadow: 0 4px 24px rgba(91,159,255,0.13);
+.writing-space[contenteditable="true"]:focus {
+    border: 2px solid #2563eb;
     background: #f0f7ff;
+    box-shadow: 0 4px 24px rgba(91,159,255,0.13);
 }
 
-label, .editor-header, .editor-toolbar, .editor-footer {
-    margin-bottom: 1.2em;
-}
-
-.editor-header {
-    margin-bottom: 2em;
-}
-
-body.dark-mode {
-    background: #181a20;
-    color: #d5fd;
-}
-
-body.dark-mode input[type="text"], body.dark-mode textarea, body.dark-mode select {
-    background: #23272f;
-    color: #d5fd;
-    border: 1.5px solid #39315b;
-}
-
-body.dark-mode input[type="text"]:focus, body.dark-mode textarea:focus, body.dark-mode select:focus {
-    background: #23272f;
-    border: 1.5px solid #47d5d0;
-    box-shadow: 0 2px 8px rgba(71,213,208,0.13);
-}
-
-body.dark-mode button, body.dark-mode .toolbar-btn, body.dark-mode .save-btn {
-    background: linear-gradient(90deg, #39315b 0%, #47d5d0 100%);
-    color: #fff;
-}
-
-body.dark-mode .sidebar .folder-header,
-body.dark-mode .sidebar .folder-label {
-    background: #23272f;
-    color: #47d5d0;
-}
-
-body.dark-mode .sidebar .folder-header:hover,
-body.dark-mode .sidebar .folder-label:hover {
-    background: #39315b;
-    color: #47d5d0;
-}
-
-body.dark-mode .sidebar .file-link {
-    background: #181a20;
-    color: #d5fd;
-}
-
-body.dark-mode .sidebar .file-link:hover, body.dark-mode .sidebar .file-link:focus {
-    background: #39315b;
-    color: #47d5d0;
-}
-
-body.dark-mode #editor-panel .writing-space {
-    background: #23272f;
-    color: #fff;
-    border: 1.5px solid #39315b;
-    box-shadow: 0 2px 16px rgba(71,213,208,0.07);
-}
-
-/* Add inner margin for sidebar folder and file highlights */
-.sidebar .folder-header,
-.sidebar .folder-label,
-.sidebar .file-link {
-    padding-left: 0.7em !important;
-    padding-right: 0.7em !important;
-}
-
-/* Sidebar: Subtle highlight for hover */
-.sidebar .folder-header:hover,
-.sidebar .folder-label:hover,
-.sidebar .file-link:hover,
-.sidebar .file-link:focus {
-    background: #c2c6e6; /* just a shade darker than #d3d5fd */
+/* Make formatted blocks visually distinct */
+.writing-space[contenteditable="true"] h1,
+.writing-space[contenteditable="true"] h2,
+.writing-space[contenteditable="true"] h3 {
+    background: #e6f7fa;
+    border-left: 4px solid #47d5d0;
+    padding: 0.2em 0.7em;
+    border-radius: 8px;
+    margin: 1.2em 0 0.7em 0;
     color: #23272f;
 }
 
-/* Sidebar: Special highlight for selected/active document */
-.sidebar .file-link.active,
-.sidebar .file-link.selected {
-    background: #929aab;   /* second-color, more contrast */
-    color: #fff;
-    font-weight: 700;
+.writing-space[contenteditable="true"] pre,
+.writing-space[contenteditable="true"] code {
+    background: #f4f4f4;
+    color: #39315b;
+    border-radius: 6px;
+    padding: 0.4em 0.7em;
+    font-family: 'Fira Mono', 'Courier New', Courier, monospace;
+    font-size: 1em;
+    margin: 0.7em 0;
+    display: block;
+}
+
+.writing-space[contenteditable="true"] blockquote {
+    border-left: 4px solid #47d5d0;
+    background: #e6f7fa;
+    color: #39315b;
+    margin: 1em 0;
+    padding: 0.7em 1.2em;
+    border-radius: 8px;
+    font-style: italic;
+}
+
+.writing-space[contenteditable="true"] ul,
+.writing-space[contenteditable="true"] ol {
+    background: #f4f4f4;
+    border-radius: 8px;
+    padding: 0.7em 1.2em;
+    margin: 0.7em 0 0.7em 2em;
+}
+
+.writing-space[contenteditable="true"] li {
+    margin-bottom: 0.3em;
+}
+
+.writing-space[contenteditable="true"] a {
+    color: #2563eb;
+    text-decoration: underline;
+    font-weight: 500;
+}
+
+.writing-space[contenteditable="true"] img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 0.7em 0;
     box-shadow: 0 2px 8px rgba(71,74,86,0.10);
-}
-
-body.dark-mode .sidebar .file-link.active,
-body.dark-mode .sidebar .file-link.selected {
-    background: #39315b;
-    color: #47d5d0;
-    font-weight: 700;
-    box-shadow: 0 2px 8px rgba(71,213,208,0.10);
-}
-
-/* Indentation for subdirectories and files in the sidebar */
-.sidebar .folder {
-    margin-left: calc(var(--sidebar-indent, 0) * 1.2em);
-}
-.sidebar .file {
-    margin-left: calc((var(--sidebar-indent, 0) + 1) * 1.2em);
-}
-/* Ensure folder-header and file-link fill the available width */
-.sidebar .folder-header,
-.sidebar .folder-label,
-.sidebar .file-link {
-    width: 100%;
-    box-sizing: border-box;
-}
-.sidebar > ul.folder-tree > .folder,
-.sidebar > ul.folder-tree > .file {
-    margin-left: 0 !important;
 }

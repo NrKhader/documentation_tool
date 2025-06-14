@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block title %}Edit {{ title }} - Documentation Tool{% endblock %}
 {% block content %}
-<div class="page-flex">
-    <aside class="sidebar">
+<div class="page-flex" style="min-height: 100vh; width: 100vw; max-width: 100vw; margin: 0; padding: 0; display: flex; flex-wrap: nowrap; overflow: hidden;">
+    <aside class="sidebar" style="height: 100vh; min-width: 220px; max-width: 320px; flex-shrink: 0; overflow-y: auto;" aria-label="Sections Sidebar">
         <h4 class="sidebar-title">{{ current_section|capitalize }}</h4>
         <!-- filepath: /Users/nkhader/projects/documentation_tool/documentation_tool/src/templates/edit.html -->
         <ul class="sidebar-list">
@@ -19,9 +19,9 @@
             <a href="{{ url_for('new_document') }}" class="edit-btn" style="margin-top:1em;">+ New Document</a>
         </div>
     </aside>
-    <div class="page-main-container container">
+    <div class="page-main-container container" id="editor-panel" style="flex: 1 1 0; width: 100%; max-width: 100vw; min-width: 0; margin: 0; padding: 0 2vw 0 2vw; display: flex; flex-direction: column; justify-content: flex-start; overflow: auto; min-height: 100vh; box-sizing: border-box;">
         <main>
-            <form method="post" id="doc-form" autocomplete="off">
+            <form method="post" id="doc-form" autocomplete="off" style="width: 100%;">
                 <header class="editor-header">
                     <input type="text" id="title" name="title" class="editor-title"
                         value="{{ title if title else '' }}" required>
@@ -52,7 +52,7 @@
                     style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 320px;">
                 <label for="content" style="font-size:0.97em; margin-bottom:0.2em;">Content:</label>
                 <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content"
-                    style="font-size:0.98em; min-height:180px; padding:1em 0.7em; border-radius:8px; border:1.5px solid #929aab;">
+                    style="font-size:1.12em; min-height:40vh; padding:2em 1.5em; border-radius:14px; border:2px solid #47d5d0; background:#f8fafd; margin-bottom:1.5em; outline:none; box-shadow:0 2px 16px rgba(91,159,255,0.13); transition: border 0.2s, box-shadow 0.2s;">
                     {{ content|safe }}
                 </div>
                 <textarea id="content" name="content" style="display:none;" required>{{ content|safe }}</textarea>
@@ -65,8 +65,30 @@
             </form>
         </main>
     </div>
-    <aside class="markdown-help notebook-cheatsheet">
+    <aside class="markdown-help notebook-cheatsheet" style="min-width: 220px; max-width: 350px; flex-shrink: 0; overflow-y: auto;" aria-label="Markdown Cheatsheet">
         <!-- cheatsheet content -->
     </aside>
 </div>
+<style>
+@media (max-width: 1200px) {
+  .sidebar, .markdown-help.notebook-cheatsheet {
+    display: none !important;
+  }
+  .page-main-container.container {
+    padding: 0 1vw 0 1vw !important;
+  }
+}
+@media (max-width: 700px) {
+  .page-main-container.container {
+    padding: 0 0.2vw 0 0.2vw !important;
+  }
+  .editor-header .editor-title {
+    font-size: 1.2em !important;
+  }
+  #writing-space {
+    font-size: 1em !important;
+    padding: 1em 0.5em !important;
+  }
+}
+</style>
 {% endblock %}

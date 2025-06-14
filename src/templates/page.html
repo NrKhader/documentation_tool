@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 {% block title %}{{ title }} - Documentation Tool{% endblock %}
 {% block content %}
-<div class="page-flex">
-    <aside class="sidebar">
+<div class="page-flex" style="min-height: 90vh; width: 100vw; max-width: 100vw; margin: 0; padding: 0;">
+    <aside class="sidebar" style="height: 100vh; min-width: 220px; max-width: 320px;" aria-label="Sections Sidebar">
         <h4 class="sidebar-title">{{ current_section|capitalize }}</h4>
         <ul class="folder-tree">
             {% import 'macros/sidebar_macros.html' as macros %}
             {{ macros.render_tree(doc_tree, 0, current_doc_path) }}
         </ul>
     </aside>
-    <div class="page-main-container container">
+    <div class="page-main-container container" style="flex: 1 1 0; width: 100%; max-width: 100vw; min-width: 0; margin: 0; padding: 0 2vw 0 2vw; display: flex; flex-direction: column; justify-content: flex-start;">
         <header style="margin-bottom: 1.2em;">
             <h1 style="margin-bottom: 0.2em;">{{ title }}</h1>
             <a href="{{ url_for('edit_document', doc_path=title) }}" class="edit-btn">Edit</a>
@@ -22,7 +22,7 @@
         </div>
         {% endif %}
         <main>
-            <article>
+            <article style="background: #f8fafd; border-radius: 14px; border: 2px solid #47d5d0; padding: 2em 1.5em; min-height: 40vh; font-size: 1.12em; box-shadow: 0 2px 16px rgba(91,159,255,0.13);">
                 {{ content|safe }}
             </article>
         </main>
