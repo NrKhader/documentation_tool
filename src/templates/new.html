@@ -1,41 +1,49 @@
 {% extends "base.html" %}
 {% block title %}New Document - Documentation Tool{% endblock %}
 {% block content %}
-<div class="editor-fullpage-wrapper">
-    <form method="post" id="doc-form" autocomplete="off" class="editor-form">
-        <header class="editor-header">
-            <input type="text" id="title" name="title" class="editor-title" placeholder="Document Title" required>
-            <span id="autosave-status" class="autosave-status">Saved</span>
-        </header>
-        <div class="editor-meta-row">
-            <label for="section">Section/Folder:</label>
-            <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference">
-            <label for="tags">Tags:</label>
-            <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api">
-        </div>
-        <div class="editor-toolbar">
-            <!-- toolbar buttons here -->
-            <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><b>B</b></button>
-            <button type="button" class="toolbar-btn" data-command="italic" title="Italic"><i>I</i></button>
-            <button type="button" class="toolbar-btn" data-command="h2" title="Heading 2">H2</button>
-            <button type="button" class="toolbar-btn" data-command="code" title="Code Block">{"</>"}</button>
-            <button type="button" class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">• List</button>
-            <button type="button" class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">1. List</button>
-            <button type="button" class="toolbar-btn" data-command="createLink" title="Insert Link">🔗</button>
-            <button type="button" class="toolbar-btn" data-command="insertImage" title="Insert Image">🖼️</button>
-            <button type="button" class="toolbar-btn" data-command="formatBlock" data-value="blockquote" title="Blockquote">❝</button>
-            <button type="button" class="toolbar-btn" data-command="insertHorizontalRule" title="Horizontal Rule">―</button>
-            <button type="button" class="toolbar-btn" data-command="undo" title="Undo">⎌</button>
-            <button type="button" class="toolbar-btn" data-command="redo" title="Redo">⎌⎌</button>
-        </div>
-        <label for="content" class="sr-only">Content:</label>
-        {% import 'macros/writing_space.html' as ws %}
-        {{ ws.render_writing_space('', readonly=False) }}
-        <textarea id="content" name="content" class="hidden" required></textarea>
-        <div class="editor-footer">
-            <span id="word-count">0 words</span>
-            <button type="submit" class="save-btn">Create</button>
-        </div>
-    </form>
+<div class="page-flex">
+    <aside class="sidebar" aria-label="Sections Sidebar">
+        <h4 class="sidebar-title">New Document</h4>
+        <ul class="folder-tree">
+            {% import 'macros/sidebar_macros.html' as macros %}
+            {{ macros.render_tree(doc_tree, 0, None) }}
+        </ul>
+    </aside>
+    <div class="page-main-container container" id="editor-panel">
+        <form method="post" id="doc-form" autocomplete="off" class="editor-form">
+            <header class="editor-header">
+                <input type="text" id="title" name="title" class="editor-title" placeholder="Document Title" required>
+                <span id="autosave-status" class="autosave-status">Saved</span>
+            </header>
+            <div class="editor-meta-row">
+                <label for="section">Section/Folder:</label>
+                <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference">
+                <label for="tags">Tags:</label>
+                <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api">
+            </div>
+            <div class="editor-toolbar">
+                <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><b>B</b></button>
+                <button type="button" class="toolbar-btn" data-command="italic" title="Italic"><i>I</i></button>
+                <button type="button" class="toolbar-btn" data-command="h2" title="Heading 2">H2</button>
+                <button type="button" class="toolbar-btn" data-command="code" title="Code Block">{"</>"}</button>
+                <button type="button" class="toolbar-btn" data-command="insertUnorderedList" title="Bullet List">• List</button>
+                <button type="button" class="toolbar-btn" data-command="insertOrderedList" title="Numbered List">1. List</button>
+                <button type="button" class="toolbar-btn" data-command="createLink" title="Insert Link">🔗</button>
+                <button type="button" class="toolbar-btn" data-command="insertImage" title="Insert Image">🖼️</button>
+                <button type="button" class="toolbar-btn" data-command="formatBlock" data-value="blockquote" title="Blockquote">❝</button>
+                <button type="button" class="toolbar-btn" data-command="insertHorizontalRule" title="Horizontal Rule">―</button>
+                <button type="button" class="toolbar-btn" data-command="undo" title="Undo">⎌</button>
+                <button type="button" class="toolbar-btn" data-command="redo" title="Redo">⎌⎌</button>
+            </div>
+            <label for="content" class="sr-only">Content:</label>
+            {% import 'macros/writing_space.html' as ws %}
+            {{ ws.render_writing_space('', readonly=False) }}
+            <textarea id="content" name="content" class="hidden" required></textarea>
+            <div class="editor-footer">
+                <span id="word-count">0 words</span>
+                <button type="submit" class="save-btn">Create</button>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock %}
