@@ -831,8 +831,8 @@ form input[type="text"], form textarea {
 .writing-space,
 .writing-space.readonly,
 #writing-space {
-    background: #f8fafd;
-    color: #23272f;
+    background: #23272b;
+    color: #f3f6fa;
     border-radius: 14px;
     border: 2px solid #47d5d0;
     min-height: 40vh;
@@ -843,19 +843,23 @@ form input[type="text"], form textarea {
     box-shadow: 0 2px 16px rgba(91,159,255,0.13);
     transition: border 0.2s, box-shadow 0.2s, background 0.2s;
     word-break: break-word;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 900px;
+    display: block;
 }
 
 .writing-space:focus,
 #writing-space:focus {
     border: 2px solid #2563eb;
-    background: #f0f7ff;
+    background: #232b2f;
     box-shadow: 0 4px 24px rgba(91,159,255,0.13);
 }
 
 .writing-space.readonly {
-    background: #f8fafd;
-    color: #23272f;
-    border: 2px solid #47d5d0;
+    background: #181c20;
+    color: var(--text-main);
+    border: 2px solid var(--border-writing);
     pointer-events: none;
     user-select: text;
 }
@@ -864,18 +868,18 @@ form input[type="text"], form textarea {
 .writing-space h1,
 .writing-space h2,
 .writing-space h3 {
-    background: #e6f7fa;
-    border-left: 4px solid #47d5d0;
+    background: #1a232b;
+    border-left: 4px solid var(--border-writing-focus);
     padding: 0.2em 0.7em;
     border-radius: 8px;
     margin: 1.2em 0 0.7em 0;
-    color: #23272f;
+    color: var(--text-heading);
 }
 
 .writing-space pre,
 .writing-space code {
-    background: #f4f4f4;
-    color: #39315b;
+    background: #181c20;
+    color: #ffeb95;
     border-radius: 6px;
     padding: 0.4em 0.7em;
     font-family: 'Fira Mono', 'Courier New', Courier, monospace;
@@ -885,9 +889,9 @@ form input[type="text"], form textarea {
 }
 
 .writing-space blockquote {
-    border-left: 4px solid #47d5d0;
-    background: #e6f7fa;
-    color: #39315b;
+    border-left: 4px solid var(--border-writing-focus);
+    background: #1a232b;
+    color: var(--text-accent);
     margin: 1em 0;
     padding: 0.7em 1.2em;
     border-radius: 8px;
@@ -896,7 +900,7 @@ form input[type="text"], form textarea {
 
 .writing-space ul,
 .writing-space ol {
-    background: #f4f4f4;
+    background: #232b2f;
     border-radius: 8px;
     padding: 0.7em 1.2em;
     margin: 0.7em 0 0.7em 2em;
@@ -907,9 +911,13 @@ form input[type="text"], form textarea {
 }
 
 .writing-space a {
-    color: #2563eb;
+    color: var(--link);
     text-decoration: underline;
     font-weight: 500;
+}
+
+.writing-space a:hover {
+    color: var(--link-hover);
 }
 
 .writing-space img {
@@ -919,321 +927,176 @@ form input[type="text"], form textarea {
     box-shadow: 0 2px 8px rgba(71,74,86,0.10);
 }
 
-/* Dark mode for writing space */
-body.dark-mode .writing-space,
-body.dark-mode .writing-space.readonly,
-body.dark-mode #writing-space {
-    background: #23272f;
-    color: #d3d5fd;
-    border: 2px solid #47d5d0;
-}
-
-body.dark-mode .writing-space h1,
-body.dark-mode .writing-space h2,
-body.dark-mode .writing-space h3 {
-    background: #23272f;
-    color: #47d5d0;
-    border-left: 4px solid #47d5d0;
-}
-
-body.dark-mode .writing-space pre,
-body.dark-mode .writing-space code {
-    background: #181a20;
-    color: #ffeb95;
-}
-
-body.dark-mode .writing-space blockquote {
-    background: #23272f;
-    color: #47d5d0;
-    border-left: 4px solid #47d5d0;
-}
-
-/* Responsive adjustments */
-@media (max-width: 1200px) {
-    #editor-panel.page-main-container.container {
-        max-width: 98vw;
-        padding: 1.5em 1vw;
-    }
-    #editor-panel #section,
-    #editor-panel #tags {
-        width: 95%;
-    }
-}
-
-@media (max-width: 900px) {
-    #editor-panel.page-main-container.container {
-        max-width: 100vw;
-        padding: 1em 0.5em;
-    }
-    #editor-panel .editor-header,
-    #editor-panel .editor-toolbar,
-    #editor-panel .writing-space,
-    #editor-panel form label,
-    #editor-panel #section,
-    #editor-panel #tags,
-    #editor-panel .editor-footer {
-        padding-left: 0;
-        padding-right: 0;
-        margin-left: 0;
-        margin-right: 0;
-        width: 100%;
-        max-width: none;
-    }
-    #editor-panel #section,
-    #editor-panel #tags {
-        width: 100%;
-        max-width: none;
-    }
-    #editor-panel .writing-space {
-        width: 100%;
-        min-height: 30vh;
-        padding: 1em 0.5em;
-    }
-}
-
-@media (max-width: 600px) {
-    #editor-panel .editor-header,
-    #editor-panel .editor-toolbar {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.5em;
-        padding: 0.5em 0;
-    }
-    #editor-panel .writing-space {
-        padding: 0.5em 0.2em;
-        font-size: 1em;
-    }
-    #editor-panel #section,
-    #editor-panel #tags {
-        font-size: 1em;
-        padding: 0.5em 0.7em;
-    }
-}
-
-/* --- Sidebar Styles: Remove emojis/icons, align text left, no extra padding --- */
-.sidebar .folder-header,
-.sidebar .folder-label,
-.sidebar .file-link {
-    /* Remove emojis/icons by not rendering them in the template, but also: */
-    background: none;
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    text-align: left !important;
-    display: block;
-    font-size: 1em;
-    font-weight: 600;
-    color: #39315b;
-    margin-left: 0 !important;
-    gap: 0 !important;
-}
-
-body.dark-mode .sidebar .folder-header,
-body.dark-mode .sidebar .folder-label,
-body.dark-mode .sidebar .file-link {
-    color: #47d5d0;
-}
-
-.sidebar .file-list {
-    padding-left: 0 !important;
-    border-left: none !important;
-    margin-left: 0 !important;
-}
-
-.sidebar .folder,
-.sidebar .file {
-    padding-left: 0 !important;
-    padding-right: 0 !important;
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    text-align: left !important;
-}
-
-.sidebar .folder-header:hover,
-.sidebar .file-link:hover {
-    background: #e6f7fa;
-    color: #47d5d0;
-}
-
-body.dark-mode .sidebar .folder-header:hover,
-body.dark-mode .sidebar .file-link:hover {
-    background: #39315b;
-    color: #47d5d0;
-}
-
-/* --- Sidebar: Differentiate Folders and Files --- */
-.sidebar .folder-header,
-.sidebar .folder-label {
-    background: #e6f0fa;
-    color: #39315b;
-    font-weight: 700;
+.tag {
+    background: var(--tag-bg);
+    color: var(--tag-text);
     border-radius: 6px;
-    padding: 0.4em 0.7em;
-    margin-bottom: 0.1em;
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s;
-    text-align: left !important;
-    display: block;
+    padding: 0.2em 0.7em;
+    font-size: 0.97em;
+    margin-right: 0.5em;
 }
 
-body.dark-mode .sidebar .folder-header,
-body.dark-mode .sidebar .folder-label {
-    background: #23272f;
-    color: #47d5d0;
+/* --- Dark Mode Editor Styles (from new.html) --- */
+:root {
+  --background-main: #181c20;
+  --background-panel: #23272b;
+  --background-writing: #23272b;
+  --background-writing-focus: #232b2f;
+  --border-writing: #47d5d0;
+  --border-writing-focus: #38b2ac;
+  --text-main: #f3f6fa;
+  --text-secondary: #bfc6d1;
+  --text-accent: #47d5d0;
+  --text-heading: #eaf6fb;
+  --toolbar-bg: #23272b;
+  --toolbar-btn-bg: #23272b;
+  --toolbar-btn-hover: #2d3748;
+  --input-bg: #23272b;
+  --input-border: #47d5d0;
+  --input-text: #f3f6fa;
+  --shadow-writing: 0 2px 24px 0 rgba(71,213,208,0.10);
+  --tag-bg: #2d3748;
+  --tag-text: #47d5d0;
+  --link: #38b2ac;
+  --link-hover: #47d5d0;
+}
+body, html {
+  background: var(--background-main);
+  color: var(--text-main);
 }
 
-.sidebar .folder-header:hover,
-.sidebar .folder-label:hover {
-    background: #d3d5fd;
-    color: #23272f;
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-heading);
+  font-weight: 700;
+  letter-spacing: 0.01em;
 }
 
-body.dark-mode .sidebar .folder-header:hover,
-body.dark-mode .sidebar .folder-label:hover {
-    background: #39315b;
-    color: #47d5d0;
+.sidebar, .container, .page-main-container, .markdown-help, .section-block {
+  background: var(--background-panel);
+  color: var(--text-main);
+  border-radius: 12px;
+  box-shadow: 0 2px 16px rgba(71,213,208,0.04);
 }
 
-.sidebar .file-link {
-    background: #fff;
-    color: #23272f;
-    font-weight: 500;
-    border-radius: 8px;
-    padding: 0.5em 1em;
-    margin-bottom: 0.1em;
-    display: block;
-    text-align: left;
-    transition: background 0.15s, color 0.15s;
-}
-
-body.dark-mode .sidebar .file-link {
-    background: #181a20;
-    color: #d3d5d5;
-}
-
-.sidebar .file-link:hover {
-    background: #e6f7fa;
-    color: #39315b;
-}
-
-body.dark-mode .sidebar .file-link:hover {
-    background: #39315b;
-    color: #47d5d0;
+.sidebar-title {
+  color: var(--text-accent);
+  border-bottom: 1px solid var(--border-writing);
 }
 
 input[type="text"], textarea, select {
-    background: #fff;
-    border: 1.5px solid #c3c8d4;
-    color: #23272f;
-    border-radius: 10px;
-    padding: 0.7em 1.2em;
-    font-size: 1em;
-    box-shadow: 0 1px 4px rgba(71,74,86,0.06);
-    transition: border 0.2s, box-shadow 0.2s;
+  background: var(--input-bg);
+  color: var(--input-text);
+  border: 1.5px solid var(--input-border);
 }
-
 input[type="text"]:focus, textarea:focus, select:focus {
-    border: 1.5px solid #5b9fff;
-    box-shadow: 0 2px 8px rgba(91,159,255,0.13);
-    outline: none;
-    background: #f0f7ff;
+  border: 2px solid var(--border-writing-focus);
+  background: var(--background-writing-focus);
+  outline: none;
 }
 
-button, .toolbar-btn, .save-btn {
-    background: linear-gradient(90deg, #5b9fff 0%, #47d5d0 100%);
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    padding: 0.6em 1.6em;
-    font-size: 1.08em;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(91,159,255,0.10);
-    transition: background 0.18s, box-shadow 0.18s, color 0.18s;
+button, .toolbar-btn, .save-btn, .edit-btn {
+  background: var(--text-accent);
+  color: var(--background-main);
+  border: none;
+  border-radius: 7px;
+  padding: 0.55em 1.3em;
+  font-size: 1em;
+  font-weight: 600;
+  box-shadow: none;
+  transition: background 0.13s, color 0.13s;
+}
+button:hover, .toolbar-btn:hover, .save-btn:hover, .edit-btn:hover,
+button:focus, .toolbar-btn:focus, .save-btn:focus, .edit-btn:focus {
+  background: var(--border-writing-focus);
+  color: var(--text-main);
 }
 
-button:hover, .toolbar-btn:hover, .save-btn:hover,
-button:focus, .toolbar-btn:focus, .save-btn:focus {
-    background: linear-gradient(90deg, #47d5d0 0%, #5b9fff 100%);
-    color: #fff;
-    box-shadow: 0 4px 16px rgba(91,159,255,0.18);
-    outline: none;
+.writing-space, .writing-space.readonly, #writing-space {
+  background: var(--background-writing);
+  color: var(--text-main);
+  border-radius: 14px;
+  border: 2px solid var(--border-writing);
+  min-height: 40vh;
+  font-size: 1.14em;
+  padding: 2em 1.5em;
+  margin-bottom: 1.5em;
+  outline: none;
+  box-shadow: var(--shadow-writing);
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+  word-break: break-word;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 900px;
+  display: block;
+}
+.writing-space:focus, #writing-space:focus {
+  border: 2px solid var(--border-writing-focus);
+  background: var(--background-writing-focus);
+  box-shadow: 0 4px 24px rgba(71,213,208,0.13);
+}
+.writing-space.readonly {
+  background: #181c20;
+  color: var(--text-main);
+  border: 2px solid var(--border-writing);
+  pointer-events: none;
+  user-select: text;
 }
 
-/* Writing Space Enhancements */
-.writing-space[contenteditable="true"] {
-    background: #f8fafd;
-    border-radius: 14px;
-    border: 2px solid #47d5d0;
-    min-height: 40vh;
-    font-size: 1.12em;
-    padding: 2em 1.5em;
-    margin-bottom: 1.5em;
-    outline: none;
-    box-shadow: 0 2px 16px rgba(91,159,255,0.13);
-    transition: border 0.2s, box-shadow 0.2s;
+.writing-space h1, .writing-space h2, .writing-space h3 {
+  background: #1a232b;
+  border-left: 4px solid var(--border-writing-focus);
+  padding: 0.2em 0.7em;
+  border-radius: 8px;
+  margin: 1.2em 0 0.7em 0;
+  color: var(--text-heading);
 }
-
-.writing-space[contenteditable="true"]:focus {
-    border: 2px solid #2563eb;
-    background: #f0f7ff;
-    box-shadow: 0 4px 24px rgba(91,159,255,0.13);
+.writing-space pre, .writing-space code {
+  background: #181c20;
+  color: #ffeb95;
+  border-radius: 6px;
+  padding: 0.4em 0.7em;
+  font-family: 'Fira Mono', 'Courier New', Courier, monospace;
+  font-size: 1em;
+  margin: 0.7em 0;
+  display: block;
 }
-
-/* Make formatted blocks visually distinct */
-.writing-space[contenteditable="true"] h1,
-.writing-space[contenteditable="true"] h2,
-.writing-space[contenteditable="true"] h3 {
-    background: #e6f7fa;
-    border-left: 4px solid #47d5d0;
-    padding: 0.2em 0.7em;
-    border-radius: 8px;
-    margin: 1.2em 0 0.7em 0;
-    color: #23272f;
+.writing-space blockquote {
+  border-left: 4px solid var(--border-writing-focus);
+  background: #1a232b;
+  color: var(--text-accent);
+  margin: 1em 0;
+  padding: 0.7em 1.2em;
+  border-radius: 8px;
+  font-style: italic;
 }
-
-.writing-space[contenteditable="true"] pre,
-.writing-space[contenteditable="true"] code {
-    background: #f4f4f4;
-    color: #39315b;
-    border-radius: 6px;
-    padding: 0.4em 0.7em;
-    font-family: 'Fira Mono', 'Courier New', Courier, monospace;
-    font-size: 1em;
-    margin: 0.7em 0;
-    display: block;
+.writing-space ul, .writing-space ol {
+  background: #232b2f;
+  border-radius: 8px;
+  padding: 0.7em 1.2em;
+  margin: 0.7em 0 0.7em 2em;
 }
-
-.writing-space[contenteditable="true"] blockquote {
-    border-left: 4px solid #47d5d0;
-    background: #e6f7fa;
-    color: #39315b;
-    margin: 1em 0;
-    padding: 0.7em 1.2em;
-    border-radius: 8px;
-    font-style: italic;
+.writing-space li {
+  margin-bottom: 0.3em;
 }
-
-.writing-space[contenteditable="true"] ul,
-.writing-space[contenteditable="true"] ol {
-    background: #f4f4f4;
-    border-radius: 8px;
-    padding: 0.7em 1.2em;
-    margin: 0.7em 0 0.7em 2em;
+.writing-space a {
+  color: var(--link);
+  text-decoration: underline;
+  font-weight: 500;
 }
-
-.writing-space[contenteditable="true"] li {
-    margin-bottom: 0.3em;
+.writing-space a:hover {
+  color: var(--link-hover);
 }
-
-.writing-space[contenteditable="true"] a {
-    color: #2563eb;
-    text-decoration: underline;
-    font-weight: 500;
+.writing-space img {
+  max-width: 100%;
+  border-radius: 8px;
+  margin: 0.7em 0;
+  box-shadow: 0 2px 8px rgba(71,74,86,0.10);
 }
-
-.writing-space[contenteditable="true"] img {
-    max-width: 100%;
-    border-radius: 8px;
-    margin: 0.7em 0;
-    box-shadow: 0 2px 8px rgba(71,74,86,0.10);
+.tag {
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  border-radius: 6px;
+  padding: 0.2em 0.7em;
+  font-size: 0.97em;
+  margin-right: 0.5em;
 }
