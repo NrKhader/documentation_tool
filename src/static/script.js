@@ -284,6 +284,9 @@ document.addEventListener('DOMContentLoaded', function () {
                         return;
                     }
                     document.getElementById('editor-panel').style.display = 'block';
+                    // Hide welcome panel if present
+                    var welcomePanel = document.getElementById('welcome-panel');
+                    if (welcomePanel) welcomePanel.style.display = 'none';
                     document.getElementById('title').value = data.title || '';
                     document.getElementById('section').value = data.section || '';
                     document.getElementById('tags').value = data.tags ? data.tags.map(t => `#${t}`).join(', ') : '';
@@ -293,16 +296,25 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
-    // New Document button
-    const newDocBtn = document.getElementById('new-doc-btn');
-    if (newDocBtn) {
-        newDocBtn.addEventListener('click', function () {
-            document.getElementById('editor-panel').style.display = 'block';
-            document.getElementById('title').value = '';
-            document.getElementById('section').value = '';
-            document.getElementById('tags').value = '';
-            document.getElementById('writing-space').innerHTML = '';
-            document.getElementById('content').value = '';
+    // Optionally, if you have a way to "deselect" a document, show the welcome panel again:
+    // Example: Add a "Home" button click handler
+    const homeBtn = document.querySelector('a[href="' + window.location.pathname + '"]');
+    if (homeBtn) {
+        homeBtn.addEventListener('click', function (e) {
+            // Only handle if not a full reload
+            if (document.getElementById('welcome-panel')) {
+                e.preventDefault();
+                document.getElementById('editor-panel').style.display = 'none';
+                document.getElementById('welcome-panel').style.display = 'block';
+                // Optionally clear the editor fields
+                document.getElementById('title').value = '';
+                document.getElementById('section').value = '';
+                document.getElementById('tags').value = '';
+                document.getElementById('writing-space').innerHTML = '';
+                document.getElementById('content').value = '';
+                // Remove active class from file links
+                document.querySelectorAll('.file-link.active').forEach(el => el.classList.remove('active'));
+            }
         });
     }
 });
