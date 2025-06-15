@@ -6,22 +6,20 @@
         <h4 class="sidebar-title">New Document</h4>
         <ul class="folder-tree">
             {% import 'macros/sidebar_macros.html' as macros %}
-            {{ macros.render_tree(doc_tree, 0, None) }}
+            {{ macros.render_tree(doc_tree, 0, current_doc_path) }}
         </ul>
     </aside>
     <div class="page-main-container container" id="editor-panel">
-        <form method="post" id="doc-form" autocomplete="off" class="editor-form">
+        <form method="post" id="doc-form" autocomplete="off">
             <header class="editor-header">
                 <input type="text" id="title" name="title" class="editor-title" placeholder="Document Title" required>
-                <span id="autosave-status" class="autosave-status">Saved</span>
+                <span id="autosave-status" class="autosave-status" style="margin-left:0.5em; color:#47d5d0; font-size:0.97em; display:none;">Saved</span>
             </header>
-            <div class="editor-meta-row">
-                <label for="section">Section/Folder:</label>
-                <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference">
-                <label for="tags">Tags:</label>
-                <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api">
-            </div>
-            <div class="editor-toolbar">
+            <label for="section" style="font-size:0.97em; margin-bottom:0.2em;">Section/Folder:</label>
+            <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference"
+                style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 220px;">
+            <div class="editor-toolbar" style="gap:0.3em; margin-bottom:0.7em;">
+                <!-- toolbar buttons here -->
                 <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><b>B</b></button>
                 <button type="button" class="toolbar-btn" data-command="italic" title="Italic"><i>I</i></button>
                 <button type="button" class="toolbar-btn" data-command="h2" title="Heading 2">H2</button>
@@ -35,11 +33,14 @@
                 <button type="button" class="toolbar-btn" data-command="undo" title="Undo">⎌</button>
                 <button type="button" class="toolbar-btn" data-command="redo" title="Redo">⎌⎌</button>
             </div>
-            <label for="content" class="sr-only">Content:</label>
+            <label for="tags" style="font-size:0.97em; margin-bottom:0.2em;">Tags:</label>
+            <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api"
+                style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 320px;">
+            <label for="content" style="font-size:0.97em; margin-bottom:0.2em;">Content:</label>
             {% import 'macros/writing_space.html' as ws %}
             {{ ws.render_writing_space('', readonly=False) }}
-            <textarea id="content" name="content" class="hidden" required></textarea>
-            <div class="editor-footer">
+            <textarea id="content" name="content" style="display:none;" required></textarea>
+            <div class="editor-footer" style="margin-top:0.5em; color:#929aab; font-size:0.95em; text-align:right;">
                 <span id="word-count">0 words</span>
                 <button type="submit" class="save-btn">Create</button>
             </div>

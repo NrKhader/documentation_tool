@@ -9,7 +9,7 @@
             {{ macros.render_tree(doc_tree, 0, current_doc_path) }}
         </ul>
     </aside>
-    <div class="page-main-container container" id="editor-panel">
+    <div class="page-main-container container" id="editor-panel" {% if not current_doc_path %}style="display:none;"{% endif %}>
         <form id="doc-form" autocomplete="off">
             <header class="editor-header">
                 <input type="text" id="title" name="title" class="editor-title" placeholder="Document Title" required>
@@ -45,5 +45,23 @@
             </div>
         </form>
     </div>
+    {% if not current_doc_path %}
+    <div class="page-main-container container" id="welcome-panel">
+        <header>
+            <h1>Welcome to Documentation Tool</h1>
+        </header>
+        <section>
+            <p>
+                Select a document from the sidebar to view or edit.<br>
+                Or <a href="{{ url_for('new_document') }}" class="edit-btn">Create a new document</a>.
+            </p>
+            <ul>
+                <li>Organize your docs by sections/folders.</li>
+                <li>Use tags and search for quick access.</li>
+                <li>Toggle light/dark mode for comfort.</li>
+            </ul>
+        </section>
+    </div>
+    {% endif %}
 </div>
 {% endblock %}
