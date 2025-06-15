@@ -14,8 +14,9 @@
         <main>
             <article>
                 <h2>{{ tutorial.title }}</h2>
+                {% import 'macros/writing_space.html' as ws %}
                 <div class="content">
-                    {{ tutorial.content | safe }}
+                    {{ ws.render_writing_space(tutorial.content, readonly=True) }}
                 </div>
             </article>
         </main>

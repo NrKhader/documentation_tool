@@ -1,0 +1,11 @@
+{# filepath: src/templates/macros/editor_macros.html #}
+{% macro writing_space(content="", editable=False, placeholder="Start writing...", id="writing-space") %}
+    <div id="{{ id }}" class="writing-space"
+         contenteditable="{{ 'true' if editable else 'false' }}"
+         spellcheck="true"
+         aria-label="Document content"
+         {% if editable %}tabindex="0"{% endif %}
+         {% if placeholder and not content %}data-placeholder="{{ placeholder }}"{% endif %}>
+        {{ content|safe }}
+    </div>
+{% endmacro %}

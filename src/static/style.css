@@ -827,393 +827,126 @@ form input[type="text"], form textarea {
     margin-bottom: 1.2em;
 }
 
-/* Markdown/Article Content Styling */
-.page-main-container article {
-    font-size: 1.08em;
-    line-height: 1.7;
-    color: inherit;
-    padding: 0.5em 0 1em 0;
+/* --- Unified Writing Space Styles --- */
+.writing-space,
+.writing-space.readonly,
+#writing-space {
+    background: #f8fafd;
+    color: #23272f;
+    border-radius: 14px;
+    border: 2px solid #47d5d0;
+    min-height: 40vh;
+    font-size: 1.12em;
+    padding: 2em 1.5em;
+    margin-bottom: 1.5em;
+    outline: none;
+    box-shadow: 0 2px 16px rgba(91,159,255,0.13);
+    transition: border 0.2s, box-shadow 0.2s, background 0.2s;
     word-break: break-word;
 }
 
-.page-main-container article h1,
-.page-main-container article h2,
-.page-main-container article h3,
-.page-main-container article h4,
-.page-main-container article h5,
-.page-main-container article h6 {
-    margin-top: 1.3em;
-    margin-bottom: 0.5em;
-    font-weight: 600;
+.writing-space:focus,
+#writing-space:focus {
+    border: 2px solid #2563eb;
+    background: #f0f7ff;
+    box-shadow: 0 4px 24px rgba(91,159,255,0.13);
+}
+
+.writing-space.readonly {
+    background: #f8fafd;
+    color: #23272f;
+    border: 2px solid #47d5d0;
+    pointer-events: none;
+    user-select: text;
+}
+
+/* Markdown/Article Content Styling (for .writing-space) */
+.writing-space h1,
+.writing-space h2,
+.writing-space h3 {
+    background: #e6f7fa;
+    border-left: 4px solid #47d5d0;
+    padding: 0.2em 0.7em;
+    border-radius: 8px;
+    margin: 1.2em 0 0.7em 0;
+    color: #23272f;
+}
+
+.writing-space pre,
+.writing-space code {
+    background: #f4f4f4;
     color: #39315b;
-}
-
-body.dark-mode .page-main-container article h1,
-body.dark-mode .page-main-container article h2,
-body.dark-mode .page-main-container article h3,
-body.dark-mode .page-main-container article h4,
-body.dark-mode .page-main-container article h5,
-body.dark-mode .page-main-container article h6 {
-    color: #47d5d0;
-}
-
-.page-main-container article p {
+    border-radius: 6px;
+    padding: 0.4em 0.7em;
+    font-family: 'Fira Mono', 'Courier New', Courier, monospace;
+    font-size: 1em;
     margin: 0.7em 0;
+    display: block;
 }
 
-.page-main-container article ul,
-.page-main-container article ol {
+.writing-space blockquote {
+    border-left: 4px solid #47d5d0;
+    background: #e6f7fa;
+    color: #39315b;
+    margin: 1em 0;
+    padding: 0.7em 1.2em;
+    border-radius: 8px;
+    font-style: italic;
+}
+
+.writing-space ul,
+.writing-space ol {
+    background: #f4f4f4;
+    border-radius: 8px;
+    padding: 0.7em 1.2em;
     margin: 0.7em 0 0.7em 2em;
-    padding-left: 1.2em;
 }
 
-.page-main-container article li {
+.writing-space li {
     margin-bottom: 0.3em;
 }
 
-.page-main-container article pre {
-    margin: 1em 0;
-    background: #f4f4f4;
-    color: #23272f;
-    border-radius: 6px;
-    padding: 1em;
-    overflow-x: auto;
+.writing-space a {
+    color: #2563eb;
+    text-decoration: underline;
+    font-weight: 500;
 }
 
-body.dark-mode .page-main-container article pre {
+.writing-space img {
+    max-width: 100%;
+    border-radius: 8px;
+    margin: 0.7em 0;
+    box-shadow: 0 2px 8px rgba(71,74,86,0.10);
+}
+
+/* Dark mode for writing space */
+body.dark-mode .writing-space,
+body.dark-mode .writing-space.readonly,
+body.dark-mode #writing-space {
+    background: #23272f;
+    color: #d3d5fd;
+    border: 2px solid #47d5d0;
+}
+
+body.dark-mode .writing-space h1,
+body.dark-mode .writing-space h2,
+body.dark-mode .writing-space h3 {
+    background: #23272f;
+    color: #47d5d0;
+    border-left: 4px solid #47d5d0;
+}
+
+body.dark-mode .writing-space pre,
+body.dark-mode .writing-space code {
     background: #181a20;
     color: #ffeb95;
 }
 
-.page-main-container article code {
-    background: #f4f4f4;
-    color: #39315b;
-    border-radius: 4px;
-    padding: 2px 6px;
-    font-family: 'Fira Mono', 'Courier New', Courier, monospace;
-    font-size: 0.98em;
-}
-
-body.dark-mode .page-main-container article code {
-    background: #23272f;
-    color: #ffeb95;
-}
-
-.page-main-container article blockquote {
-    border-left: 4px solid #47d5d0;
-    background: #e6f7fa;
-    color: #39315b;
-    margin: 1em 0;
-    padding: 0.7em 1em;
-    border-radius: 6px;
-    font-style: italic;
-}
-
-body.dark-mode .page-main-container article blockquote {
+body.dark-mode .writing-space blockquote {
     background: #23272f;
     color: #47d5d0;
     border-left: 4px solid #47d5d0;
 }
-
-.section-dropdown-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.section-dropdown {
-    margin-bottom: 1em;
-}
-
-.section-toggle {
-    background: none;
-    border: none;
-    font-size: 1.12em;
-    font-weight: 600;
-    color: #39315b;
-    cursor: pointer;
-    width: 100%;
-    text-align: left;
-    padding: 0.4em 0.2em;
-    transition: color 0.2s;
-    outline: none;
-}
-
-.section-toggle.open,
-.section-toggle:hover {
-    color: #47d5d0;
-}
-
-body.dark-mode .section-toggle {
-    color: #23272f;
-}
-
-body.dark-mode .section-toggle.open,
-body.dark-mode .section-toggle:hover {
-    color: #47d5d0;
-}
-
-/* --- Enhanced Editor Area (Editing Space Only, Sidebar Unaffected) --- */
-
-#editor-panel.page-main-container.container {
-    width: 100%;
-    max-width: 1100px;
-    margin: 2.5em auto 2em auto;
-    padding: 2.5em 2.5em 2em 2.5em;
-    border-radius: 18px;
-    box-shadow: 0 4px 32px rgba(71,74,86,0.11);
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    min-height: 70vh;
-    transition: box-shadow 0.2s, background 0.2s;
-}
-
-body.dark-mode #editor-panel.page-main-container.container {
-    background: #23272f;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.22);
-}
-
-#editor-panel .editor-header {
-    display: flex;
-    align-items: center;
-    gap: 1.2em;
-    padding: 0 0 1.2em 0;
-    background: transparent;
-    border-bottom: 1.5px solid #e0e3f5;
-    width: 100%;
-    margin-bottom: 1.5em;
-}
-
-body.dark-mode #editor-panel .editor-header {
-    border-bottom: 1.5px solid #39315b;
-}
-
-#editor-panel .editor-title {
-    flex: 1 1 0;
-    max-width: none;
-    min-width: 0;
-    font-size: 2em;
-    padding: 0.5em 1em;
-    border-radius: 10px;
-    border: 1.5px solid #929aab;
-    background: #f8f9ff;
-    color: #39315b;
-    margin: 0;
-    box-shadow: 0 2px 8px rgba(71,74,86,0.07);
-    outline: none;
-    font-weight: 700;
-    letter-spacing: 0.01em;
-    transition: border 0.2s, background 0.2s, color 0.2s;
-}
-
-body.dark-mode #editor-panel .editor-title {
-    background: #23272f;
-    color: #fff;
-    border: 1.5px solid #39315b;
-}
-
-#editor-panel .editor-title:focus,
-#editor-panel .editor-title:active {
-    background: #e6f7fa;
-    color: #23272f;
-    border: 1.5px solid #47d5d0;
-    outline: none;
-}
-
-body.dark-mode #editor-panel .editor-title:focus,
-body.dark-mode #editor-panel .editor-title:active {
-    background: #39315b;
-    color: #fff;
-    border: 1.5px solid #47d5d0;
-}
-
-#editor-panel .editor-toolbar {
-    display: flex;
-    gap: 0.5em;
-    padding: 1em 0 1em 0;
-    background: transparent;
-    border-bottom: 1.5px solid #e0e3f5;
-    width: 100%;
-    margin-bottom: 1.5em;
-}
-
-body.dark-mode #editor-panel .editor-toolbar {
-    border-bottom: 1.5px solid #39315b;
-}
-
-#editor-panel .toolbar-btn {
-    background: #f8f9ff;
-    color: #39315b;
-    border: 1.5px solid #e0e3f5;
-    border-radius: 8px;
-    padding: 0.5em 1.1em;
-    font-size: 1.08em;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background 0.15s, color 0.15s, border 0.15s;
-    margin: 0;
-    box-shadow: 0 1px 4px rgba(71,74,86,0.08);
-}
-
-#editor-panel .toolbar-btn:hover, #editor-panel .toolbar-btn:focus {
-    background: #e6f7fa;
-    color: #47d5d0;
-    border: 1.5px solid #47d5d0;
-    outline: none;
-}
-
-body.dark-mode #editor-panel .toolbar-btn {
-    background: #23272f;
-    color: #d3d5fd;
-    border: 1.5px solid #39315b;
-}
-
-body.dark-mode #editor-panel .toolbar-btn:hover, body.dark-mode #editor-panel .toolbar-btn:focus {
-    background: #39315b;
-    color: #47d5d0;
-    border: 1.5px solid #47d5d0;
-}
-
-#editor-panel form label {
-    font-size: 1.08em;
-    font-weight: 500;
-    margin: 2em 0 0.3em 0;
-    display: block;
-    color: #39315b;
-}
-
-body.dark-mode #editor-panel form label {
-    color: #d3d5fd;
-}
-
-#editor-panel #section,
-#editor-panel #tags {
-    display: block;
-    width: 70%;
-    max-width: 900px;
-    margin: 0 0 1.2em 0;
-    padding: 0.7em 1.2em;
-    border-radius: 10px;
-    border: 1.5px solid #929aab;
-    background: #f8f9ff;
-    color: #39315b;
-    font-size: 1.08em;
-    box-shadow: 0 1px 4px rgba(71,74,86,0.08);
-    outline: none;
-    transition: border 0.2s, background 0.2s, color 0.2s;
-}
-
-body.dark-mode #editor-panel #section,
-body.dark-mode #editor-panel #tags {
-    background: #23272f;
-    color: #fff;
-    border: 1.5px solid #39315b;
-}
-
-#editor-panel #section:focus,
-#editor-panel #tags:focus {
-    background: #e6f7fa;
-    color: #23272f;
-    border: 1.5px solid #47d5d0;
-    outline: none;
-}
-
-body.dark-mode #editor-panel #section:focus,
-body.dark-mode #editor-panel #tags:focus {
-    background: #39315b;
-    color: #fff;
-    border: 1.5px solid #47d5d0;
-}
-
-#editor-panel .writing-space {
-    width: 100%;
-    min-height: 40vh;
-    margin: 2em 0 0 0;
-    padding: 2em 1.5em;
-    border-radius: 14px;
-    border: 1.5px solid #929aab;
-    background: #fff;
-    color: #23272f;
-    font-size: 1.18em;
-    line-height: 1.7;
-    box-shadow: 0 2px 16px rgba(71,74,86,0.09);
-    outline: none;
-    resize: none;
-    transition: border 0.2s, background 0.2s, color 0.2s;
-}
-
-body.dark-mode #editor-panel .writing-space {
-    background: #23272f;
-    color: #fff;
-    border: 1.5px solid #39315b;
-    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
-}
-
-#editor-panel .writing-space:focus {
-    background: #e6f7fa;
-    color: #23272f;
-    border: 1.5px solid #47d5d0;
-    outline: none;
-}
-
-body.dark-mode #editor-panel .writing-space:focus {
-    background: #39315b;
-    color: #fff;
-    border: 1.5px solid #47d5d0;
-}
-
-#editor-panel .editor-footer {
-    margin: 1.5em 0 0 0;
-    color: #929aab;
-    font-size: 1.05em;
-    text-align: right;
-    width: 100%;
-    padding-right: 0;
-}
-
-/* --- Sidebar Styles: Isolated --- */
-.sidebar,
-.sidebar * {
-    font-size: 0.97em !important;
-    /* All other sidebar-specific styles remain here */
-}
-
-/* Remove global font-size for input[type="text"], textarea, etc. */
-/* Instead, scope them if needed: */
-.sidebar input[type="text"],
-.sidebar textarea {
-    /* Sidebar-specific input/textarea styles (if any) */
-}
-
-/* --- Editor/Main Content Styles: Reset font-size --- */
-#editor-panel,
-#editor-panel * {
-    font-size: 1em !important;
-}
-
-/* If you want to further control the writing space font size: */
-#editor-panel .writing-space {
-    font-size: 1.18em !important;
-}
-
-/* If you want to control the title font size: */
-#editor-panel .editor-title {
-    font-size: 2em !important;
-}
-
-/* If you want to control the toolbar button font size: */
-#editor-panel .toolbar-btn {
-    font-size: 1.08em !important;
-}
-
-/* Remove or adjust any global [type="text"] rules that are not sidebar-specific */
-input[type="text"], textarea {
-    font-size: 1em;
-}
-
-/* If you want to keep the rest of your editor enhancements, leave them as-is below this block */
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {

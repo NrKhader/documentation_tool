@@ -22,9 +22,8 @@
         </div>
         {% endif %}
         <main>
-            <article style="background: #f8fafd; border-radius: 14px; border: 2px solid #47d5d0; padding: 2em 1.5em; min-height: 40vh; font-size: 1.12em; box-shadow: 0 2px 16px rgba(91,159,255,0.13);">
-                {{ content|safe }}
-            </article>
+            {% import 'macros/writing_space.html' as ws %}
+            {{ ws.render_writing_space(content, readonly=True) }}
         </main>
     </div>
 </div>

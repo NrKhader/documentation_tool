@@ -41,9 +41,8 @@
             <input type="text" id="tags" name="tags" placeholder="#python, #flask, #api"
                 style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 320px;">
             <label for="content" style="font-size:0.97em; margin-bottom:0.2em;">Content:</label>
-            <div id="writing-space" class="writing-space" contenteditable="true" spellcheck="true" aria-label="Document content"
-                style="font-size:1.12em; min-height:40vh; padding:2em 1.5em; border-radius:14px; border:2px solid #47d5d0; background:#f8fafd; margin-bottom:1.5em; outline:none; box-shadow:0 2px 16px rgba(91,159,255,0.13); transition: border 0.2s, box-shadow 0.2s;">
-            </div>
+            {% import 'macros/writing_space.html' as ws %}
+            {{ ws.render_writing_space('', readonly=False) }}
             <textarea id="content" name="content" style="display:none;" required></textarea>
             <div class="editor-footer" style="margin-top:0.5em; color:#929aab; font-size:0.95em; text-align:right;">
                 <span id="word-count">0 words</span>
