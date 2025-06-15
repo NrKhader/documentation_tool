@@ -2,18 +2,18 @@
 {% block title %}{{ title }} - Documentation Tool{% endblock %}
 {% block content %}
 <div class="page-flex">
-    <aside class="sidebar">
+    <aside class="sidebar" aria-label="Sections Sidebar">
         <h4 class="sidebar-title">{{ current_section|capitalize }}</h4>
         <ul class="folder-tree">
             {% import 'macros/sidebar_macros.html' as macros %}
             {{ macros.render_tree(doc_tree, 0, current_doc_path) }}
         </ul>
     </aside>
-    <div class="page-main-container container" id="editor-panel" style="display:none;">
+    <div class="page-main-container container" id="editor-panel">
         <form id="doc-form" autocomplete="off">
             <header class="editor-header">
                 <input type="text" id="title" name="title" class="editor-title" placeholder="Document Title" required>
-                <span id="autosave-status" style="margin-left:0.5em; color:#47d5d0; font-size:0.97em; display:none;">Saved</span>
+                <span id="autosave-status" class="autosave-status" style="margin-left:0.5em; color:#47d5d0; font-size:0.97em; display:none;">Saved</span>
             </header>
             <label for="section" style="font-size:0.97em; margin-bottom:0.2em;">Section/Folder:</label>
             <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference"

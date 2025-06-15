@@ -338,3 +338,51 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 });
+
+// Responsive sidebar toggle for mobile
+// Show/hide sidebar on small screens
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        const sidebar = document.querySelector('.sidebar');
+        const sidebarToggle = document.getElementById('sidebar-toggle');
+        if (!sidebar || !sidebarToggle) return;
+        function updateSidebarVisibility() {
+            if (window.innerWidth <= 900) {
+                sidebarToggle.style.display = 'block';
+                sidebar.classList.remove('open');
+            } else {
+                sidebarToggle.style.display = 'none';
+                sidebar.classList.remove('open');
+            }
+        }
+        sidebarToggle.addEventListener('click', function () {
+            sidebar.classList.toggle('open');
+        });
+        window.addEventListener('resize', updateSidebarVisibility);
+        updateSidebarVisibility();
+    });
+})();
+
+// Code block copy-to-clipboard button
+(function () {
+    document.addEventListener('DOMContentLoaded', function () {
+        document.querySelectorAll('pre, .writing-space pre').forEach(function (pre) {
+            if (pre.querySelector('.code-copy-btn')) return;
+            const btn = document.createElement('button');
+            btn.className = 'code-copy-btn';
+            btn.type = 'button';
+            btn.title = 'Copy code';
+            btn.setAttribute('aria-label', 'Copy code');
+            btn.innerHTML = '📋';
+            btn.addEventListener('click', function () {
+                let code = pre.querySelector('code') ? pre.querySelector('code').innerText : pre.innerText;
+                navigator.clipboard.writeText(code).then(() => {
+                    btn.innerHTML = '✔️';
+                    setTimeout(() => { btn.innerHTML = '📋'; }, 1200);
+                });
+            });
+            pre.style.position = 'relative';
+            pre.appendChild(btn);
+        });
+    });
+})();

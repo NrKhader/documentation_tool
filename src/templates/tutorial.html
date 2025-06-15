@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tutorial</title>
+    <title>{% block title %}Tutorial - Documentation Tool{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
+    {% block content %}
     <div class="container">
         <header>
             <h1>Tutorial</h1>
@@ -20,10 +21,8 @@
                 </div>
             </article>
         </main>
-        <footer>
-            <p>&copy; {{ current_year }} Documentation Tool</p>
-        </footer>
     </div>
+    {% endblock %}
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>

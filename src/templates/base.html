@@ -8,24 +8,26 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
+    <header role="banner">
         <h1>Documentation Tool</h1>
-        <nav>
+        <nav role="navigation" aria-label="Main navigation">
             <ul>
                 <li><a href="{{ url_for('index') }}">Home</a></li>
                 <li><a href="{{ url_for('new_document') }}">New Document</a></li>
             </ul>
-            <form action="{{ url_for('search') }}" method="get" class="search-form">
+            <form action="{{ url_for('search') }}" method="get" class="search-form" role="search">
                 <input type="text" name="q" placeholder="Search..." value="{{ request.args.get('q', '') }}" aria-label="Search">
-                <button type="submit">🔍</button>
+                <button type="submit" aria-label="Search">🔍</button>
             </form>
             <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">🌙</button>
+            <button id="sidebar-toggle" class="sidebar-toggle" aria-label="Open sidebar" style="display:none;">☰</button>
         </nav>
     </header>
-    <main>
+    <main id="main-content" tabindex="-1" role="main">
         {% block content %}{% endblock %}
     </main>
-    <footer>
+    <footer role="contentinfo">
         <p>&copy; 2025 Documentation Tool</p>
     </footer>
     <script src="{{ url_for('static', filename='script.js') }}"></script>

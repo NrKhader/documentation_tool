@@ -4,8 +4,7 @@
 <div class="editor-fullpage-wrapper">
     <form method="post" id="doc-form" autocomplete="off" class="editor-form">
         <header class="editor-header">
-            <input type="text" id="title" name="title" class="editor-title"
-                placeholder="Document Title" required>
+            <input type="text" id="title" name="title" class="editor-title" placeholder="Document Title" required>
             <span id="autosave-status" class="autosave-status">Saved</span>
         </header>
         <div class="editor-meta-row">
@@ -32,7 +31,7 @@
         <label for="content" class="sr-only">Content:</label>
         {% import 'macros/writing_space.html' as ws %}
         {{ ws.render_writing_space('', readonly=False) }}
-        <textarea id="content" name="content" style="display:none;" required></textarea>
+        <textarea id="content" name="content" class="hidden" required></textarea>
         <div class="editor-footer">
             <span id="word-count">0 words</span>
             <button type="submit" class="save-btn">Create</button>
