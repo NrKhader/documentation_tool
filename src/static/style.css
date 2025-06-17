@@ -904,4 +904,138 @@ button, .sidebar-list li, .sidebar .file-link, .sidebar .folder-header {
   min-width: 44px;
 }
 
+/* === Welcome Panel Styles === */
+#welcome-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  background: linear-gradient(120deg, #d3d5fd 0%, #e6f4fa 100%);
+  box-shadow: 0 4px 32px rgba(0,87,184,0.07);
+  border: 1.5px solid #e3e6ee;
+  margin: 0 auto;
+  width: 100%;
+}
+#welcome-panel .welcome-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 600px;
+  margin: 0 auto;
+  width: 100%;
+}
+#welcome-panel .welcome-emoji {
+  font-size: 3.5rem;
+  margin-bottom: 0.5em;
+  color: #2563eb;
+  text-align: center;
+}
+#welcome-panel .welcome-title {
+  font-size: 2.5em;
+  font-weight: 800;
+  color: #23272f;
+  margin-bottom: 0.2em;
+  letter-spacing: 0.01em;
+  text-align: center;
+}
+#welcome-panel .welcome-title span {
+  color: #2563eb;
+}
+#welcome-panel .welcome-desc {
+  font-size: 1.25em;
+  color: #474a56;
+  margin-bottom: 1.2em;
+  text-align: center;
+}
+#welcome-panel .welcome-btn {
+  font-size: 1.15em;
+  padding: 0.8em 2.2em;
+  margin-bottom: 1.5em;
+  box-shadow: 0 2px 8px rgba(0,87,184,0.10);
+  display: inline-block;
+  text-align: center;
+}
+#welcome-panel .welcome-features {
+  margin-top: 2em;
+  text-align: left;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(71,74,86,0.06);
+  padding: 1.5em 2em;
+  width: 100%;
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+#welcome-panel .welcome-features h2 {
+  font-size: 1.2em;
+  color: #2563eb;
+  font-weight: 700;
+  margin-bottom: 0.7em;
+  text-align: left;
+}
+#welcome-panel .welcome-features ul {
+  font-size: 1.08em;
+  color: #474a56;
+  line-height: 1.7;
+  margin-left: 1.2em;
+  text-align: left;
+}
+@media (max-width: 700px) {
+  #welcome-panel .welcome-inner {
+    padding: 0 0.5em;
+  }
+  #welcome-panel .welcome-features {
+    padding: 1em 0.5em;
+    max-width: 100vw;
+  }
+}
+
+/* === Welcome Panel Dark Mode Styles === */
+body.dark-mode #welcome-panel {
+  background: linear-gradient(120deg, #23272b 0%, #181c20 100%);
+  box-shadow: 0 4px 32px rgba(0,224,255,0.07);
+  border: 1.5px solid #39315b;
+}
+body.dark-mode #welcome-panel .welcome-inner {
+  background: none;
+}
+body.dark-mode #welcome-panel .welcome-emoji {
+  color: #38b2ac;
+}
+body.dark-mode #welcome-panel .welcome-title {
+  color: #f3f6fa;
+}
+body.dark-mode #welcome-panel .welcome-title span {
+  color: #00e0ff;
+}
+body.dark-mode #welcome-panel .welcome-desc {
+  color: #d3d5fd;
+}
+body.dark-mode #welcome-panel .welcome-btn {
+  background: linear-gradient(90deg, #00e0ff 60%, #38b2ac 100%);
+  color: #181a20;
+  box-shadow: 0 2px 8px rgba(0,224,255,0.10);
+}
+body.dark-mode #welcome-panel .welcome-btn:hover,
+body.dark-mode #welcome-panel .welcome-btn:focus {
+  background: linear-gradient(90deg, #38b2ac 60%, #00e0ff 100%);
+  color: #fff;
+}
+body.dark-mode #welcome-panel .welcome-features {
+  background: #23272b;
+  color: #d3d5fd;
+  box-shadow: 0 2px 8px rgba(0,224,255,0.06);
+  border-radius: 12px;
+}
+body.dark-mode #welcome-panel .welcome-features h2 {
+  color: #00e0ff;
+}
+body.dark-mode #welcome-panel .welcome-features ul {
+  color: #d3d5fd;
+}
+
 /* === End of Unified Design System CSS === */

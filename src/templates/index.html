@@ -46,24 +46,20 @@
         </form>
     </div>
     {% if not current_doc_path %}
-    <div class="page-main-container container" id="welcome-panel" style="display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 60vh; background: linear-gradient(120deg, #d3d5fd 0%, #e6f4fa 100%); box-shadow: 0 4px 32px rgba(0,87,184,0.07); border: 1.5px solid #e3e6ee;">
-        <div style="text-align: center; max-width: 600px;">
-            <div style="font-size: 3.5rem; margin-bottom: 0.5em; color: #2563eb;">
-                📚
-            </div>
-            <h1 style="font-size: 2.5em; font-weight: 800; color: #23272f; margin-bottom: 0.2em; letter-spacing: 0.01em;">
-                Welcome to <span style="color: #2563eb;">Documentation Tool</span>
-            </h1>
-            <p style="font-size: 1.25em; color: #474a56; margin-bottom: 1.2em;">
+    <div class="page-main-container container" id="welcome-panel">
+        <div class="welcome-inner">
+            <div class="welcome-emoji">📚</div>
+            <h1 class="welcome-title">Welcome to <span>Documentation Tool</span></h1>
+            <p class="welcome-desc">
                 Your personal space for organized, beautiful, and always-accessible documentation.<br>
                 Start by creating a new document or select one from the sidebar.
             </p>
-            <a href="{{ url_for('new_document') }}" class="edit-btn" style="font-size: 1.15em; padding: 0.8em 2.2em; margin-bottom: 1.5em; box-shadow: 0 2px 8px rgba(0,87,184,0.10);">
+            <a href="{{ url_for('new_document') }}" class="edit-btn welcome-btn">
                 + Create New Document
             </a>
-            <div style="margin-top: 2em; text-align: left; background: #fff; border-radius: 12px; box-shadow: 0 2px 8px rgba(71,74,86,0.06); padding: 1.5em 2em;">
-                <h2 style="font-size: 1.2em; color: #2563eb; font-weight: 700; margin-bottom: 0.7em;">Features:</h2>
-                <ul style="font-size: 1.08em; color: #474a56; line-height: 1.7; margin-left: 1.2em;">
+            <div class="welcome-features">
+                <h2>Features:</h2>
+                <ul>
                     <li>🗂️ Organize docs by sections/folders</li>
                     <li>🏷️ Tag and search for quick access</li>
                     <li>🌙 Toggle light/dark mode for comfort</li>
