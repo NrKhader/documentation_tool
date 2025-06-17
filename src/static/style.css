@@ -217,7 +217,19 @@ footer {
   transition: box-shadow 0.2s, background 0.2s, width 0.2s;
   z-index: 20;
   overflow-y: auto;
-  border-right: 2px solid var(--border);
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary) #e6f0fa;
+}
+.sidebar::-webkit-scrollbar {
+  width: 7px;
+  background: #e6f0fa;
+}
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 6px;
+}
+.sidebar::-webkit-scrollbar-thumb:hover {
+  background: var(--accent);
 }
 .sidebar-title {
   font-size: 1.18em;
