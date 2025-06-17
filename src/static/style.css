@@ -70,6 +70,8 @@ html, body {
   min-height: 100vh;
   height: auto;
   width: 100%;
+  margin: 0;
+  padding: 0;
   /* Improved readability */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -84,12 +86,16 @@ body {
   height: auto;
   width: 100%;
   background: var(--background);
+  margin: 0;
+  padding: 0;
 }
 body.dark-mode, body.dark-mode html {
   background: #181c20 !important;
   min-height: 100vh;
   height: auto;
   width: 100%;
+  margin: 0;
+  padding: 0;
   background-attachment: scroll;
   background-repeat: repeat-y;
 }
@@ -413,6 +419,8 @@ body.dark-mode .sidebar .folder-label {
   margin-right: auto;
   max-width: 900px;
   width: 100%;
+  padding-left: 2.5vw;
+  padding-right: 2.5vw;
   box-sizing: border-box;
   overflow-x: auto;
 }
