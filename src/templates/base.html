@@ -10,10 +10,9 @@
 <body>
     <a href="#main-content" class="sr-only sr-only-focusable">Skip to main content</a>
     <header role="banner">
-        <h1>Documentation Tool</h1>
+        <h1><a href="{{ url_for('index') }}" style="color: inherit; text-decoration: none; cursor: pointer;">Documentation Tool</a></h1>
         <nav role="navigation" aria-label="Main navigation">
             <ul>
-                <li><a href="{{ url_for('index') }}">Home</a></li>
                 <li><a href="{{ url_for('new_document') }}">New Document</a></li>
             </ul>
             <form action="{{ url_for('search') }}" method="get" class="search-form" role="search">

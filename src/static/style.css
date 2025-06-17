@@ -536,7 +536,6 @@ body.dark-mode .sidebar .folder-label {
 
 /* === 6. Buttons & Inputs === */
 button, .toolbar-btn, .save-btn, .edit-btn {
-  /* ...existing code... */
   background: linear-gradient(90deg, #2563eb 60%, #00e0ff 100%);
   color: #fff;
   border: none;
@@ -574,7 +573,6 @@ body.dark-mode button:focus, body.dark-mode .toolbar-btn:focus, body.dark-mode .
 }
 
 input[type="text"], textarea, select {
-  /* ...existing code... */
   background: #f5f8ff;
   border: 2px solid var(--primary);
   color: #181a20;
@@ -609,7 +607,6 @@ body.dark-mode input[type="text"]:focus, body.dark-mode textarea:focus, body.dar
 .writing-space,
 .writing-space.readonly,
 #writing-space {
-  /* ...existing code... */
   background: linear-gradient(135deg, #fff 80%, #f7f8fa 100%);
   color: #181a20;
   border-radius: var(--radius-lg);
@@ -813,7 +810,6 @@ body.dark-mode .writing-space img {
 
 /* === 8. Tag Styles === */
 .tag {
-  /* ...existing code... */
   background: linear-gradient(90deg, #2563eb 60%, #00e0ff 100%);
   color: #fff;
   border-radius: 8px;
