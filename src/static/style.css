@@ -103,18 +103,18 @@ body {
 }
 
 .sidebar .folder {
-    margin-left: calc(var(--sidebar-indent, 0) * 1.2em);
+    margin-left: calc(var(--sidebar-indent, 0) * 0.1em);
 }
 .sidebar .file {
-    margin-left: calc((var(--sidebar-indent, 0) + 1) * 1.2em);
+    margin-left: calc((var(--sidebar-indent, 0) + 1) * 0.1em);
 }
 .sidebar .folder-header,
 .sidebar .folder-label,
 .sidebar .file-link {
     width: 100%;
     box-sizing: border-box;
-    padding-left: 0.7em !important;
-    padding-right: 0.7em !important;
+    padding-left: 0.5em !important;
+    padding-right: 0.5em !important;
 }
 
 /* Minimal border for editor area */
@@ -312,15 +312,6 @@ body.dark-mode button:focus, body.dark-mode .toolbar-btn:focus, body.dark-mode .
     background: #0057b8;
     color: #fff;
 }
-
-/* --- Enhanced Professional Styling --- */
-
-/* === New Color Palette ===
-   .first-color  = #d3d5fd (lightest)
-   .second-color = #929aab (light gray-blue)
-   .third-color  = #474a56 (dark gray-blue)
-   .fourth-color = #0b0b0d (almost black)
-*/
 
 /* Typography & Body */
 body {
@@ -523,7 +514,7 @@ search-form button {
     font-size: 0.97em;
     line-height: 1.5;
     letter-spacing: 0.01em;
-    padding: 1.2em 0.7em 1.2em 1.1em;
+    padding: 1.2em 0.7em 1.2em 3.1em;
     min-width: 180px;
     max-width: 240px;
     background: #d3d5fd;
@@ -560,7 +551,7 @@ body.dark-mode .sidebar {
     letter-spacing: 0.01em;
     width: 100%;
     border-bottom: 1px solid #929aab33;
-    padding-bottom: 0.7em;
+    padding-bottom: 0.2em;
 }
 
 body.dark-mode .sidebar-title {
@@ -1247,9 +1238,9 @@ body.dark-mode .writing-space img {
   body, .container, .page-main-container { font-size: 0.97em; }
   .sidebar { max-width: 100vw; min-width: 0; left: -100vw; }
   .sidebar.open { left: 0; width: 100vw; }
-  .container, .page-main-container { padding: 0.5em; }
+  .container, .page-main-container { padding: 0.2em; }
   pre, code { font-size: 0.95em; }
-  th, td { padding: 0.5em 0.6em; }
+  th, td { padding: 0.2em 0.2em; }
   .search-form { margin-left: 0; }
 }
 
