@@ -16,8 +16,15 @@
                 <span id="autosave-status" class="autosave-status" style="margin-left:0.5em; color:#47d5d0; font-size:0.97em; display:none;">Saved</span>
             </header>
             <label for="section" style="font-size:0.97em; margin-bottom:0.2em;">Section/Folder:</label>
-            <input type="text" id="section" name="section" placeholder="e.g. guides, tutorials, reference"
-                style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 220px;">
+            <select id="section" name="section" style="font-size:0.97em; padding:0.25em 0.5em; margin-bottom:1em; border-radius: 6px; border: 1.5px solid #929aab; max-width: 220px;">
+                <option value="">Select a section...</option>
+                <option value="home">home</option>
+                <option value="git">git</option>
+                <option value="test">test</option>
+                <option value="projects">projects</option>
+                <option value="Useful commands">Useful commands</option>
+            </select>
+            <!-- If you want to allow custom section, you can add a text input below or allow typing in the select with JS -->
             <div class="editor-toolbar" style="gap:0.3em; margin-bottom:0.7em;">
                 <!-- toolbar buttons here -->
                 <button type="button" class="toolbar-btn" data-command="bold" title="Bold"><b>B</b></button>
