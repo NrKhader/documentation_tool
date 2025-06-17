@@ -419,6 +419,10 @@ body.dark-mode .sidebar .folder-label {
   box-sizing: border-box;
   overflow-x: auto;
 }
+.page-main-container, .container, .writing-space, .writing-space *, .writing-space pre, .writing-space code {
+  word-break: break-word;
+  box-sizing: border-box;
+}
 @media (max-width: 1200px) {
   .container, .page-main-container {
     padding-left: clamp(1vw, 2vw, 2em);
@@ -578,6 +582,23 @@ body.dark-mode input[type="text"]:focus, body.dark-mode textarea:focus, body.dar
   box-sizing: border-box;
   overflow-x: auto;
 }
+.writing-space pre,
+.writing-space code {
+  background: #f3f6fa;
+  color: #23272f;
+  border-radius: 6px;
+  padding: 0.4em 0.7em;
+  font-family: var(--font-mono);
+  font-size: 1em;
+  margin: 0.7em 0;
+  display: block;
+  border: 1px solid #e3e6ee;
+  position: relative;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
 .writing-space:focus,
 #writing-space:focus {
   border: 2.5px solid var(--primary);
@@ -615,6 +636,10 @@ body.dark-mode input[type="text"]:focus, body.dark-mode textarea:focus, body.dar
   display: block;
   border: 1px solid #e3e6ee;
   position: relative;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+  box-sizing: border-box;
 }
 .writing-space pre::after {
   content: 'Copy';
