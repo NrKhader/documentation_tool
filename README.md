@@ -1,5 +1,7 @@
 # Documentation Tool
 
+**Version:** 1.0.0
+
 This project is a documentation tool designed to create and manage documentation pages, tutorials, and code snippets. It features a simplistic webpage with text formatting options for headings, normal text, and code blocks.
 
 The idea stemmed from my need for a documentation tool that is always accessible and one that I can access and manage as I see fit. And instead of purchasing a subscription for one, I decided to make one.
@@ -154,6 +156,22 @@ deactivate
 - **Navigation:** Use the sidebar and dropdowns to quickly navigate between sections and documents.
 - **Theme:** Toggle between light and dark mode for comfortable reading.
 - **Unsaved Changes Warning:** Get a warning if you try to leave an edit page with unsaved changes.
+
+## Versioning
+
+This project uses [Semantic Versioning](https://semver.org/) (MAJOR.MINOR.PATCH).  
+- **MAJOR** version when you make incompatible API changes,
+- **MINOR** version when you add functionality in a backwards compatible manner, and
+- **PATCH** version when you make backwards compatible bug fixes.
+
+The current version is maintained in the `VERSION` file and documented in this README.
+
+## Changelog
+
+### [1.0.0] - 2024-06-09
+- Initial public release.
+- Core features: create, edit, organize, and search documentation.
+- Sidebar navigation, tags, dark mode, and auto-save.
 
 ## Contributing
 
