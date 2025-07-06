@@ -4,9 +4,9 @@
 
 This project is a documentation tool designed to create and manage documentation pages, tutorials, and code snippets. It features a simplistic webpage with text formatting options for headings, normal text, and code blocks.
 
-The idea stemmed from my need for a documentation tool that is always accessible and one that I can access and manage as I see fit. And instead of purchasing a subscription for one, I decided to make one.
+The idea stemmed from my need for a documentation tool that is always accessible and one that I can access and manage as I see fit. And instead of purchasing a subscription for one, I decided to make one with the help of AI.
 
-Now, I'm no web designer, I only worked for a single in 2020. So I had to work with copilot to be able to build this.
+Now, I'm no web designer, I only worked for a single year in 2020. So I had to work with copilot to be able to build this.
 
 The tool is still very basic and requires lots of enhancements and improvements and of course, features to consider and add.
 
